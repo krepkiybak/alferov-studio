@@ -1,8 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, access } from 'node:fs/promises';
-import { normalizePhone, normalizeTelegram, prepareOrder } from '../dist/order.js';
+import { normalizePhone, normalizeTelegram, prepareOrder, formatPhone } from '../dist/order.js';
 import { products } from '../dist/catalog.js';
+
+test('Phone formatting adds the country prefix and spacing while preserving a complete number', () => {
+  for (const raw of ['9991234567', '89991234567', '+7 (999) 123-45-67', '7 999 123 45 67']) {
+    const formatted = formatPhone(raw);
+    assert.equal(formatted, '+7 999 123 45 67');
+    assert.equal(normalizePhone(formatted), '+79991234567');
+  }
+  assert.equal(formatPhone(''), '');
+  assert.equal(formatPhone('+'), '+');
+  assert.equal(formatPhone('9'), '+7 9');
+  assert.equal(formatPhone('+79991'), '+7 999 1');
+  assert.equal(normalizePhone(formatPhone('+49 151 12345678')), '+4915112345678');
+  assert.equal(normalizePhone(formatPhone('+7 999 123 45 678')), null);
+});
 
 test('Russian phones and international phones normalize; incomplete phones are rejected', () => {
   assert.equal(normalizePhone('8 (999) 123-45-67'), '+79991234567');
