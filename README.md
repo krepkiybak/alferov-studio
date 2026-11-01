@@ -1,5 +1,7 @@
 # ALFEROV — печать и вышивка на одежде
 
+[Сайт для покупателей](https://krepkiybak.github.io/alferov-studio/) · [Репозиторий GitHub](https://github.com/krepkiybak/alferov-studio)
+
 Одностраничный каталог мастерской Игоря. Чистые HTML, CSS и JavaScript, без сборки и сторонних библиотек. Фотографии и шрифты находятся в репозитории: сайт не зависит от внешних CDN.
 
 ## Возможности
@@ -47,7 +49,7 @@ npm run check
 
 Готовый сайт — папка `dist`. Её можно разместить на любом статическом хостинге. `.openai/hosting.json` связывает проект с Sites.
 
-Для GitHub Pages подготовлен `.github/workflows/pages.yml`. После загрузки в GitHub выберите **Settings → Pages → Source → GitHub Actions**. При отправке коммита в `main` workflow публикует `dist`; также доступен ручной запуск. На GitHub Pages используйте адрес, который вернёт deployment. При смене основного домена обновите `og:image` в HTML.
+Для GitHub Pages настроен `.github/workflows/pages.yml` и выбран источник **GitHub Actions**. При отправке коммита в `main` workflow проверяет проект и публикует `dist`; также доступен ручной запуск. Основной адрес — https://krepkiybak.github.io/alferov-studio/. При смене основного домена обновите `og:url`, `og:image` и canonical в HTML.
 
 ## Изображения и шрифт
 
