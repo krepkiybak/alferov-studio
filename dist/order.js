@@ -1,11 +1,26 @@
 import { products, studio, formatPrice } from './catalog.js';
 
+export function formatPhone(raw) {
+  const value = String(raw).trim();
+  let digits = value.replace(/\D/g, '');
+  if (!digits) return value.startsWith('+') ? '+' : '';
+  if (!value.startsWith('+')) {
+    if (digits.startsWith('8')) digits = `7${digits.slice(1)}`;
+    else if (!digits.startsWith('7')) digits = `7${digits}`;
+  }
+  if (digits.startsWith('7')) {
+    const parts = [digits.slice(0, 1), digits.slice(1, 4), digits.slice(4, 7), digits.slice(7, 9), digits.slice(9, 11), digits.slice(11)];
+    return `+${parts.filter(Boolean).join(' ')}`;
+  }
+  return `+${digits.match(/.{1,3}/g).join(' ')}`;
+}
+
 export function normalizePhone(raw) {
   const value = String(raw).trim();
   if (!/^\+?[\d\s().-]+$/.test(value)) return null;
   const digits = value.replace(/\D/g, '');
-  if (/^8\d{10}$/.test(digits)) return `+7${digits.slice(1)}`;
-  if (/^7\d{10}$/.test(digits)) return `+${digits}`;
+  if (!value.startsWith('+') && /^8\d{10}$/.test(digits)) return `+7${digits.slice(1)}`;
+  if (digits.startsWith('7')) return /^7\d{10}$/.test(digits) ? `+${digits}` : null;
   if (value.startsWith('+') && /^\d{10,15}$/.test(digits)) return `+${digits}`;
   return null;
 }
@@ -24,7 +39,7 @@ export function prepareOrder({ productId, size, phone, telegram, comment = '' })
   const normalizedTelegram = normalizeTelegram(telegram);
   if (!normalizedTelegram) throw new Error('Укажите ник в Telegram: от 5 до 32 латинских букв, цифр или знаков _.');
   const lines = [
-    'Здравствуйте, Игорь! Хочу заказать футболку ALFEROV.', '',
+    `Здравствуйте, Игорь! Хочу заказать футболку ${studio.name}.`, '',
     `Модель: ${product.name}`, `Цвет: ${product.color}`, `Размер: ${size}`,
     `Цена: ${formatPrice(product.price)}`, '',
     `Телефон: ${normalizedPhone}`, `Telegram: ${normalizedTelegram}`,

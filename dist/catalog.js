@@ -1,6 +1,6 @@
 // Единственное место для изменения цен, размеров и описаний каталога.
 export const studio = {
-  name: 'ALFEROV',
+  name: 'ALFEROV ART STUDIO',
   telegram: 'ig_alferov',
   currency: 'RUB',
   sizes: ['S', 'M', 'L', 'XL', 'XXL'],
