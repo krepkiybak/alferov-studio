@@ -1,0 +1,11 @@
+{
+  "name": "alferov-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Каталог авторских футболок и мастерская печати и вышивки Игоря",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs"
+  }
+}
