@@ -56,6 +56,18 @@ test('Invalid product, missing size and invalid contacts cannot produce an order
   assert.throws(() => prepareOrder({ ...valid, telegram: '' }), /Telegram/);
 });
 
+test('Orders include the selected quantity, unit price and correct total', () => {
+  const valid = { productId: products[0].id, size: 'L', quantity: 3, phone: '89991234567', telegram: '@test_person' };
+  const order = prepareOrder(valid);
+  assert.ok(order.text.includes('Количество: 3 шт.'));
+  assert.ok(order.text.includes('Цена за штуку: 1 990 ₽'));
+  assert.ok(order.text.includes('Итого: 5 970 ₽'));
+  assert.equal(new URL(order.url).searchParams.get('text'), order.text);
+  for (const quantity of [0, -1, 1.5, 100, NaN, Infinity, '3', null]) {
+    assert.throws(() => prepareOrder({ ...valid, quantity }), /количество/);
+  }
+});
+
 test('All local HTML assets and product photos exist', async () => {
   const html = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
   const references = [...html.matchAll(/(?:href|src)="([^"#:]+)"/g)].map((match) => match[1]);
