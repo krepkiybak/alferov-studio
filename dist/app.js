@@ -6,6 +6,7 @@ const dialog = $('#product-dialog');
 const lightbox = $('#image-dialog');
 let selectedProduct;
 let selectedSize = '';
+let selectedQuantity = 1;
 let lastTrigger;
 
 $('#product-grid').innerHTML = products.map((product, index) => `
@@ -23,6 +24,27 @@ $('#product-grid').innerHTML = products.map((product, index) => `
   </article>`).join('');
 
 $('#size-options').innerHTML = studio.sizes.map((size) => `<button class="size-button" type="button" data-size="${size}" aria-pressed="false">${size}</button>`).join('');
+$('#quantity').max = String(studio.maxQuantity);
+
+function validQuantity(quantity) {
+  return Number.isInteger(quantity) && quantity >= 1 && quantity <= studio.maxQuantity;
+}
+function updateQuantity() {
+  selectedQuantity = Number($('#quantity').value);
+  const valid = validQuantity(selectedQuantity);
+  $('#product-total').textContent = valid ? formatPrice(selectedProduct.price * selectedQuantity) : '—';
+  $('#quantity-decrease').disabled = valid && selectedQuantity === 1;
+  $('#quantity-increase').disabled = valid && selectedQuantity === studio.maxQuantity;
+  $('#quantity-error').textContent = '';
+  $('#quantity').removeAttribute('aria-invalid');
+}
+function setQuantity(quantity) {
+  $('#quantity').value = String(Math.max(1, Math.min(studio.maxQuantity, quantity)));
+  updateQuantity();
+}
+$('#quantity').addEventListener('input', updateQuantity);
+$('#quantity-decrease').addEventListener('click', () => setQuantity((Number.isInteger(selectedQuantity) ? selectedQuantity : 1) - 1));
+$('#quantity-increase').addEventListener('click', () => setQuantity((Number.isInteger(selectedQuantity) ? selectedQuantity : 0) + 1));
 
 function setStep(step) {
   $('#product-choice').hidden = step !== 'product';
@@ -61,7 +83,8 @@ function openProduct(id, trigger) {
   dot.style.background = selectedProduct.colorHex;
   dot.setAttribute('aria-hidden', 'true');
   $('#product-color').append(dot, selectedProduct.color);
-  $('#product-price').textContent = formatPrice(selectedProduct.price);
+  $('#product-price').textContent = `${formatPrice(selectedProduct.price)} / шт.`;
+  setQuantity(1);
   $('#product-description').textContent = selectedProduct.description;
   $('#product-image').src = selectedProduct.image;
   document.querySelectorAll('.gallery-thumb img').forEach((img) => { img.src = selectedProduct.image; });
@@ -130,11 +153,19 @@ $('#start-order').addEventListener('click', () => {
     $('.size-button').focus({ preventScroll: true });
     return;
   }
+  if (!validQuantity(selectedQuantity)) {
+    $('#quantity-error').textContent = `Укажите количество от 1 до ${studio.maxQuantity}.`;
+    $('#quantity').setAttribute('aria-invalid', 'true');
+    $('#quantity').focus({ preventScroll: true });
+    return;
+  }
   const strong = document.createElement('strong');
   strong.textContent = selectedProduct.name;
   const details = document.createElement('span');
-  details.textContent = `${selectedProduct.color} · ${selectedSize} · ${formatPrice(selectedProduct.price)}`;
-  $('#order-summary').replaceChildren(strong, details);
+  details.textContent = `${selectedProduct.color} · ${selectedSize} · ${selectedQuantity} шт.`;
+  const total = document.createElement('span');
+  total.textContent = `${formatPrice(selectedProduct.price)} × ${selectedQuantity} = ${formatPrice(selectedProduct.price * selectedQuantity)}`;
+  $('#order-summary').replaceChildren(strong, details, total);
   setStep('order');
   $('#phone').focus({ preventScroll: true });
 });
@@ -203,7 +234,7 @@ $('#order-form').addEventListener('submit', (event) => {
   clearFormError();
   try {
     const order = prepareOrder({
-      productId: selectedProduct.id, size: selectedSize,
+      productId: selectedProduct.id, size: selectedSize, quantity: selectedQuantity,
       phone: $('#phone').value, telegram: $('#telegram').value, comment: $('#comment').value,
     });
     $('#order-message').value = order.text;

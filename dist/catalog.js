@@ -3,6 +3,7 @@ export const studio = {
   name: 'ALFEROV ART STUDIO',
   telegram: 'ig_alferov',
   currency: 'RUB',
+  maxQuantity: 99,
   sizes: ['S', 'M', 'L', 'XL', 'XXL'],
 };
 
