@@ -1,4 +1,5 @@
 export const printFormats = [
+  { id: 'A7', widthMm: 74, heightMm: 105 },
   { id: 'A6', widthMm: 105, heightMm: 148 },
   { id: 'A5', widthMm: 148, heightMm: 210 },
   { id: 'A4', widthMm: 210, heightMm: 297 },
