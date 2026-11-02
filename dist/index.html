@@ -16,13 +16,13 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preload" as="font" href="assets/golos-cyrillic.woff2" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="assets/milk-express.webp">
-  <link rel="stylesheet" href="styles.css">
-  <script type="module" src="app.js"></script>
+  <link rel="stylesheet" href="styles.css?v=20261102-project1">
+  <script type="module" src="app.js?v=20261102-project1"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalog">Перейти к каталогу</a>
   <header class="site-header shell">
-    <a href="#" class="brand" aria-label="ALFEROV ART STUDIO, на главную">ALFEROV<span class="brand-studio"> ART STUDIO</span><span class="brand-dot" aria-hidden="true">✳</span><span class="brand-caption">ПЕЧАТЬ И ВЫШИВКА</span></a>
+    <a href="#" class="brand" aria-label="ALFEROV ART STUDIO, на главную">ALFEROV<span class="brand-studio"> ART STUDIO</span><span class="brand-caption">ПЕЧАТЬ И ВЫШИВКА</span></a>
     <nav class="desktop-nav" aria-label="Основная навигация">
       <a href="#catalog">Каталог</a><a href="#studio">Своя идея</a><a href="#how-to-order">Как заказать</a>
     </nav>
@@ -65,7 +65,7 @@
 
     <section class="custom-section" id="studio" aria-labelledby="custom-title">
       <div class="shell custom-inner">
-        <div class="custom-heading"><p class="eyebrow">02 / ВАША ИДЕЯ. НАША МАСТЕРСКАЯ</p><h2 id="custom-title">А что, если<br>сделать <span class="serif-word">по-своему?</span></h2><p>Рисунок из заметок, фраза с особым смыслом или мерч для вашей команды. Обсудим идею и вместе превратим её в настоящую вещь.</p><a class="button button-dark" href="https://t.me/ig_alferov" target="_blank" rel="noopener noreferrer">Обсудить мою идею <span aria-hidden="true">↗</span></a></div>
+        <div class="custom-heading"><p class="eyebrow">02 / ВАША ИДЕЯ. НАША МАСТЕРСКАЯ</p><h2 id="custom-title">А что, если<br>сделать <span class="serif-word">по-своему?</span></h2><p>Рисунок из заметок, фраза с особым смыслом или мерч для вашей команды. Обсудим идею и вместе превратим её в настоящую вещь.</p><button class="button button-dark" type="button" data-open-project>Обсудить мою идею <span aria-hidden="true">↗</span></button></div>
         <div class="services-list">
           <div class="service-row"><div><h3>Печать на одежде</h3><p>Иллюстрации, надписи и любимые образы. Подберём решение под ваш дизайн.</p></div><span class="service-symbol" aria-hidden="true">✳</span></div>
           <div class="service-row"><div><h3>Вышивка</h3><p>Акцент, который хочется рассмотреть. От личной детали до логотипа.</p></div><svg class="thread-icon" width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true"><path d="m6 36 26-27c7-7 12-1 5 6L12 38c-5 5-9 0-6-2Z" stroke="currentColor" stroke-width="1.5"/><path d="m28 14 6-6M10 30C-2 20 28 15 17 4" stroke="currentColor" stroke-width="1.5"/></svg></div>
@@ -87,13 +87,14 @@
         <div class="print-guide-heading"><p class="eyebrow">РАЗМЕР И РАСПОЛОЖЕНИЕ</p><h3 id="print-guide-title">Примерьте свой принт.</h3><p>Выберите формат и сторону футболки. Схема покажет, сколько места займёт рисунок.</p></div>
         <div class="print-guide-layout">
           <div class="print-guide-controls">
+            <div class="print-control"><p>Способ нанесения</p><div class="print-options print-method-options" id="print-method-options" role="group" aria-label="Способ нанесения"></div></div>
             <div class="print-control"><p>Формат нанесения</p><div class="print-options print-size-options" role="group" aria-label="Формат принта"><button type="button" data-print-format="A7" aria-pressed="false">A7</button><button type="button" data-print-format="A6" aria-pressed="false">A6</button><button type="button" data-print-format="A5" aria-pressed="false">A5</button><button type="button" data-print-format="A4" aria-pressed="true">A4</button><button type="button" data-print-format="A3" aria-pressed="false">A3</button><button type="button" data-print-format="A3+" aria-pressed="false">A3+</button></div></div>
             <div class="print-control"><p>Расположение</p><div class="print-options" role="group" aria-label="Сторона футболки"><button type="button" data-print-side="front" aria-pressed="true">На груди</button><button type="button" data-print-side="back" aria-pressed="false">На спине</button></div></div>
             <div class="print-control"><p>Ориентация</p><div class="print-options" role="group" aria-label="Ориентация принта"><button type="button" data-print-orientation="portrait" aria-pressed="true">Вертикально</button><button type="button" data-print-orientation="landscape" aria-pressed="false">Горизонтально</button></div></div>
-            <div class="print-selection" aria-live="polite"><strong id="print-current-format">A4</strong><div><span id="print-dimensions">21 × 29,7 см</span><span id="print-placement-label">На груди</span></div></div>
+            <div class="print-selection" aria-live="polite"><strong id="print-current-format">A4</strong><div><span id="print-dimensions">21 × 29,7 см</span><span id="print-placement-label">На груди</span><span id="print-method-label" hidden></span></div></div>
             <p class="print-guide-note">Показано по центру условной футболки: ширина полочки 54 см, длина 74 см. Посадка и размер вещи меняют впечатление от принта. Точное положение согласуем по макету.</p>
             <p class="print-guide-note">Для A3+ в схеме принят размер 32,9 × 48,3 см. Фактическая область нанесения зависит от технологии и оборудования.</p>
-            <a class="button button-dark" id="discuss-print" href="https://t.me/ig_alferov" target="_blank" rel="noopener noreferrer">Обсудить этот вариант <span aria-hidden="true">↗</span></a>
+            <button class="button button-dark" id="discuss-print" type="button" data-open-project data-project-source="preview">Обсудить этот вариант <span aria-hidden="true">↗</span></button>
           </div>
           <div class="print-stage">
             <span class="print-stage-label">ВАШ ДИЗАЙН В МАСШТАБЕ</span>
@@ -128,7 +129,45 @@
 
   </main>
 
-  <footer class="site-footer shell"><a class="footer-brand" href="#" aria-label="ALFEROV ART STUDIO, на главную">ALFEROV<span class="brand-studio"> ART STUDIO</span><span aria-hidden="true">✳</span></a><span>© <span id="year">2026</span> · Печать и вышивка на одежде</span><a href="#" class="back-top">Наверх ↑</a></footer>
+  <footer class="site-footer shell"><a class="footer-brand" href="#" aria-label="ALFEROV ART STUDIO, на главную">ALFEROV<span class="brand-studio"> ART STUDIO</span></a><span>© <span id="year">2026</span> · Печать и вышивка на одежде</span><a href="#" class="back-top">Наверх ↑</a></footer>
+
+  <dialog id="project-dialog" class="project-dialog" aria-labelledby="project-title">
+    <button class="dialog-close circle-button" type="button" data-project-close aria-label="Закрыть форму проекта">×</button>
+    <div id="project-form-step">
+      <p class="eyebrow">ВАША ИДЕЯ / НАШ ОБЩИЙ ПРОЕКТ</p>
+      <h2 id="project-title">Расскажите о своей идее.</h2>
+      <p class="project-intro">Ответьте на несколько вопросов. Соберём сообщение для Игоря в Telegram.</p>
+      <div id="project-print-summary" class="project-print-summary" hidden></div>
+      <form id="project-form" novalidate>
+        <div class="project-field"><label for="project-idea">Что хотите сделать?</label><textarea id="project-idea" rows="3" maxlength="700" placeholder="Например, футболки с рисунком для команды. Расскажите о дизайне, цветах и пожеланиях." required aria-describedby="project-error"></textarea></div>
+        <div class="project-field-row">
+          <div class="project-field"><label for="project-garment">На какой одежде? <span class="optional">необязательно</span></label><input id="project-garment" type="text" maxlength="80" placeholder="Футболки, худи или другое изделие"></div>
+          <div class="project-field"><label for="project-quantity">Количество вещей</label><input id="project-quantity" type="number" min="1" step="1" value="1" inputmode="numeric" required aria-describedby="project-error"></div>
+        </div>
+        <div class="project-field-row">
+          <div class="project-field"><label for="project-method">Способ нанесения</label><select id="project-method" aria-describedby="project-error"><option value="">Помогите выбрать</option></select></div>
+          <div class="project-field"><label for="project-design">Есть ли макет?</label><select id="project-design" aria-describedby="project-error"><option value="help">Нужна помощь с макетом</option><option value="ready">Есть готовый макет</option><option value="sketch">Есть эскиз или референс</option></select></div>
+        </div>
+        <div class="project-field"><label for="project-deadline">Сроки и пожелания <span class="optional">необязательно</span></label><input id="project-deadline" type="text" maxlength="120" placeholder="Когда нужен заказ? Что ещё важно учесть?"></div>
+        <div class="project-field-row">
+          <div class="project-field"><label for="project-phone">Номер телефона</label><input id="project-phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" placeholder="+7 999 123 45 67" required aria-describedby="project-error"></div>
+          <div class="project-field"><label for="project-telegram">Ник в Telegram</label><input id="project-telegram" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="50" placeholder="@your_username" required aria-describedby="project-error"></div>
+        </div>
+        <p class="privacy-note">Ответы и контакты будут добавлены в сообщение для @ig_alferov. Сайт их не хранит.</p>
+        <p id="project-error" class="field-error" role="alert"></p>
+        <button class="button button-dark" type="submit">Подготовить запрос <span aria-hidden="true">↗</span></button>
+        <p class="manager-note">После отправки сообщения менеджер свяжется с вами в ближайшее время.</p>
+      </form>
+    </div>
+    <div id="project-ready-step" hidden>
+      <p class="eyebrow">ЗАПРОС ПОДГОТОВЛЕН</p><h2 id="project-ready-title">Отправим Игорю?</h2>
+      <p class="project-intro">Откройте Telegram и нажмите «Отправить» в чате. После отправки менеджер свяжется с вами в ближайшее время.</p>
+      <a class="button button-dark" id="project-send" href="https://t.me/ig_alferov" target="_blank" rel="noopener noreferrer">Отправить в Telegram <span aria-hidden="true">↗</span></a>
+      <label class="project-message-label" for="project-message">Готовый текст вашего запроса</label><textarea id="project-message" readonly rows="10"></textarea>
+      <button class="copy-button" id="project-copy" type="button">Скопировать запрос</button><p id="project-copy-status" class="copy-status" role="status"></p>
+      <button class="back-button" id="project-edit" type="button">← Изменить ответы</button>
+    </div>
+  </dialog>
 
   <dialog id="product-dialog" class="product-dialog" aria-labelledby="product-title">
     <button class="dialog-close circle-button" type="button" data-close aria-label="Закрыть карточку товара">×</button>
