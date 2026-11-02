@@ -6,6 +6,7 @@ node_modules/
 Thumbs.db
 .openai/local/
 artifacts/
+output/
 *.tar.gz
 *.zip
 
