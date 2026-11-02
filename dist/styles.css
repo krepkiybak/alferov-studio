@@ -31,4 +31,48 @@ dialog{color:var(--ink);background:var(--paper);border:0;padding:0}dialog::backd
 .purchase-total strong{display:block;font-size:20px;font-weight:500;line-height:36px}
 @media(max-width:850px){.about-section{gap:40px}.how-section{margin-top:50px}}
 @media(max-width:640px){.about-section{grid-template-columns:1fr}.catalog-note{font-size:15px}.how-section{margin-top:40px;padding-top:34px}.purchase-row{margin-top:16px}.quantity-field>label,.purchase-total>span{font-size:12px}.quantity-control button{width:38px;height:42px}#quantity{height:42px;font-size:16px}.purchase-total strong{line-height:42px}}
+p,li{text-wrap:pretty}h1,h2,h3{text-wrap:balance}
+.about-section .portrait-wrap{width:100%;max-width:350px;justify-self:end}
+.custom-heading .custom-projects{font-size:11px;margin-top:-10px;color:#634f44}
+.methods-heading{margin-bottom:17px;font-size:9px}
+.method-row{border-top:1px solid #25252133}
+.method-row:last-of-type{border-bottom:1px solid #25252133}
+.method-row summary{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 0;list-style:none;cursor:pointer;font-size:20px;letter-spacing:-.035em}
+.method-row summary::-webkit-details-marker{display:none}
+.method-row summary>span{font-size:24px;font-weight:400;transition:transform .2s}
+.method-row[open] summary>span{transform:rotate(45deg)}
+.method-row p,.methods-note{font-size:11px;color:#634f44;line-height:1.8}
+.method-row p{margin:0 0 20px;max-width:440px}
+.methods-note{margin:20px 0 0;font-size:10px}
+.print-guide{border-top:1px solid #25252133;margin-top:65px;padding-top:48px}
+.print-guide-heading{max-width:670px;margin-bottom:35px}
+.print-guide-heading .eyebrow{font-size:9px;margin-bottom:15px}
+.print-guide-heading h3{font-size:38px;line-height:1.15;letter-spacing:-.045em;margin:0 0 15px}
+.print-guide-heading>p:last-child{font-size:13px;color:#634f44;line-height:1.8;margin:0}
+.print-guide-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:75px;align-items:center}
+.print-control{margin-bottom:23px}
+.print-control>p{font-size:11px;margin-bottom:10px}
+.print-options{display:flex;gap:8px;flex-wrap:wrap}
+.print-options button{min-width:54px;min-height:42px;border:1px solid #25252155;border-radius:2px;background:transparent;padding:10px 15px;font-size:11px;white-space:nowrap}
+.print-options button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.print-options button:hover{border-color:var(--ink)}
+.print-selection{display:flex;align-items:center;gap:20px;padding:20px 0;border-block:1px solid #25252133;margin:27px 0 17px}
+.print-selection>strong{font-size:37px;letter-spacing:-.05em;font-weight:500;min-width:68px}
+.print-selection>div{display:flex;flex-direction:column;gap:3px;font-size:14px}
+.print-selection>div>span:last-child{font-size:10px;color:#634f44}
+.print-guide-note{font-size:10px;line-height:1.8;color:#634f44;margin-bottom:12px;max-width:420px}
+.print-guide-controls>.button{margin-top:12px;min-width:255px}
+.print-stage{position:relative;background:#f7f6f22e;border:1px solid #2525211f;border-radius:3px;padding:45px 14px 35px;min-width:0}
+.print-stage-label{position:absolute;top:20px;left:22px;font-size:7px;letter-spacing:.15em}
+.print-stage svg{display:block;width:100%;height:auto;overflow:visible}
+.shirt-shape{fill:#f7f0e7;stroke:#514b40;stroke-width:1.3;stroke-linejoin:round}
+.shirt-seam{fill:none;stroke:#a99e90;stroke-width:1.1}
+#print-area{fill:#d653323b;stroke:var(--orange);stroke-width:1.6;stroke-dasharray:5 4;transition:x .25s,y .25s,width .25s,height .25s}
+#print-area-label{font:500 18px var(--font);fill:var(--orange)}
+.print-dimension-line{stroke:#8f523b;stroke-width:1;stroke-dasharray:2 3}
+.print-dimension-label{font:400 17px var(--font);fill:#754d3c}
+.print-stage-caption{display:block;text-align:center;font-size:8px;line-height:1.7;color:#634f44;padding:0 25px}
+@media(max-width:1000px){.print-guide-layout{gap:35px}.print-options button{padding-inline:12px;min-width:49px}.print-guide-heading h3{font-size:34px}}
+@media(max-width:640px){.about-section .portrait-wrap{max-width:260px;justify-self:center}.print-guide{margin-top:42px;padding-top:35px}.print-guide-heading{margin-bottom:29px}.print-guide-heading h3{font-size:33px}.print-guide-heading>p:last-child{font-size:12px}.print-guide-layout{grid-template-columns:1fr;gap:30px}.print-stage{grid-row:1;padding:36px 8px 24px}.print-stage-label{font-size:6px;top:17px;left:18px}.print-stage-caption{font-size:8px;padding:0 15px}.print-control>p{font-size:12px}.print-options button{font-size:12px;min-height:44px}.print-size-options{gap:7px}.print-size-options button{flex:1;min-width:0;padding-inline:8px}.print-guide-note{font-size:10px}.method-row summary{font-size:19px}.method-row p{font-size:12px}.methods-note{font-size:10px}.custom-heading .custom-projects{font-size:11px}.print-guide-controls>.button{width:100%}}
+@media(max-width:640px){.print-guide-layout{display:flex;flex-direction:column;gap:20px}.print-guide-controls{display:contents}.print-control{order:1;margin:0;align-self:stretch}.print-selection{order:2;align-self:stretch;margin:4px 0 0;padding-block:14px}.print-stage{order:3;align-self:stretch}.print-guide-note{order:4;margin:0;max-width:none}#discuss-print{order:5;align-self:stretch;margin-top:4px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}

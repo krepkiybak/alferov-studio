@@ -1,5 +1,7 @@
 import { products, studio, formatPrice } from './catalog.js';
 import { prepareOrder, normalizePhone, normalizeTelegram, formatPhone } from './order.js';
+import { initPrintGuide } from './print-guide.js';
+import { startTypography } from './typography.js';
 
 const $ = (selector) => document.querySelector(selector);
 const dialog = $('#product-dialog');
@@ -32,7 +34,7 @@ function validQuantity(quantity) {
 function updateQuantity() {
   selectedQuantity = Number($('#quantity').value);
   const valid = validQuantity(selectedQuantity);
-  $('#product-total').textContent = valid ? formatPrice(selectedProduct.price * selectedQuantity) : '—';
+  $('#product-total').textContent = valid ? formatPrice(selectedProduct.price * selectedQuantity) : '...';
   $('#quantity-decrease').disabled = valid && selectedQuantity === 1;
   $('#quantity-increase').disabled = valid && selectedQuantity === studio.maxQuantity;
   $('#quantity-error').textContent = '';
@@ -126,7 +128,7 @@ $('#size-help-toggle').addEventListener('click', () => {
 });
 $('#gallery-expand').addEventListener('click', () => {
   $('#lightbox-image').src = selectedProduct.image;
-  $('#lightbox-image').alt = `${selectedProduct.name}, ${selectedProduct.color.toLowerCase()} цвет — полное фото`;
+  $('#lightbox-image').alt = `${selectedProduct.name}, ${selectedProduct.color.toLowerCase()} цвет, полное фото`;
   lightbox.showModal();
 });
 
@@ -274,3 +276,5 @@ $('#mobile-nav').addEventListener('click', (event) => {
   }
 });
 $('#year').textContent = new Date().getFullYear();
+initPrintGuide();
+startTypography();
