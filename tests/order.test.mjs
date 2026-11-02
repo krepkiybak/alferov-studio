@@ -5,6 +5,37 @@ import { normalizePhone, normalizeTelegram, prepareOrder, formatPhone } from '..
 import { products } from '../dist/catalog.js';
 import { printFormats, getPrintPreview, formatCentimetres } from '../dist/print-guide.js';
 import { keepShortWords } from '../dist/typography.js';
+import { applicationMethods } from '../dist/methods.js';
+import { prepareProjectRequest } from '../dist/project.js';
+
+test('Project requests carry the answers, selected print method and preview into an encoded Telegram draft', () => {
+  for (const method of applicationMethods) {
+    const request = prepareProjectRequest({
+      idea: '  Мерч команды & рисунок?  ', garment: 'Худи', quantity: 40, methodId: method.id, design: 'sketch', deadline: 'К мероприятию',
+      phone: '89991234567', telegram: 'https://t.me/test_person',
+      selection: { formatId: 'A7', side: 'back', orientation: 'landscape' },
+    });
+    const url = new URL(request.url);
+    assert.equal(url.origin, 'https://t.me');
+    assert.equal(url.pathname, '/ig_alferov');
+    assert.equal(url.searchParams.get('text'), request.text);
+    for (const answer of ['Идея: Мерч команды & рисунок?', 'Одежда: Худи', 'Количество: 40 шт.', method.label, 'Есть эскиз или референс', 'К мероприятию', 'A7, 10,5 × 7,4 см', 'на спине', 'горизонтальная', '+79991234567', '@test_person']) assert.ok(request.text.includes(answer), answer);
+    assert.ok(!request.text.includes('Итого:'));
+  }
+});
+
+test('An undecided project keeps the method and garment open for discussion without an invented format', () => {
+  const request = prepareProjectRequest({ idea: 'Хочу вышитый рисунок', phone: '89991234567', telegram: '@test_person' });
+  assert.ok(request.text.includes('Способ нанесения: помогите выбрать'));
+  assert.ok(request.text.includes('Одежда: обсудим вместе'));
+  assert.ok(request.text.includes('Нужна помощь с макетом'));
+  assert.ok(!request.text.includes('Формат:'));
+});
+
+test('Invalid project answers or contacts cannot produce a request', () => {
+  const valid = { idea: 'Рисунок для команды', phone: '89991234567', telegram: '@test_person' };
+  for (const change of [{ idea: '  ' }, { idea: 'я'.repeat(701) }, { quantity: 0 }, { quantity: 1.5 }, { quantity: Infinity }, { methodId: 'unknown' }, { design: 'unknown' }, { phone: '123' }, { telegram: '@ab' }, { selection: { formatId: 'A0' } }]) assert.throws(() => prepareProjectRequest({ ...valid, ...change }));
+});
 
 test('Print formats use verified dimensions and preserve their proportions in either orientation', () => {
   assert.deepEqual(printFormats.map(({id,widthMm,heightMm})=>[id,widthMm,heightMm]), [['A7',74,105],['A6',105,148],['A5',148,210],['A4',210,297],['A3',297,420],['A3+',329,483]]);

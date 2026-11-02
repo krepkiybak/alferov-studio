@@ -1,3 +1,5 @@
+import { applicationMethods } from './methods.js';
+
 export const printFormats = [
   { id: 'A7', widthMm: 74, heightMm: 105 },
   { id: 'A6', widthMm: 105, heightMm: 148 },
@@ -29,7 +31,15 @@ export function initPrintGuide(root = document) {
   let formatId = 'A4';
   let side = 'front';
   let orientation = 'portrait';
+  let methodId = '';
   const $ = (selector) => root.querySelector(selector);
+  for (const method of applicationMethods) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.dataset.printMethod = method.id;
+    button.textContent = method.label;
+    $('#print-method-options').append(button);
+  }
   const setAttributes = (element, attributes) => {
     for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, value);
   };
@@ -54,21 +64,18 @@ export function initPrintGuide(root = document) {
     $('#print-current-format').textContent = formatId;
     $('#print-dimensions').textContent = `${w} × ${h} см`;
     $('#print-placement-label').textContent = place;
+    $('#print-method-label').textContent = applicationMethods.find((method) => method.id === methodId)?.label || '';
+    $('#print-method-label').hidden = !methodId;
     $('#print-preview-description').textContent = `${formatId}, ${w} на ${h} сантиметров, ${place.toLowerCase()}. Условная футболка шириной 54 и длиной 74 сантиметра.`;
     for (const button of root.querySelectorAll('[data-print-format]')) button.setAttribute('aria-pressed', String(button.dataset.printFormat === formatId));
     for (const button of root.querySelectorAll('[data-print-side]')) button.setAttribute('aria-pressed', String(button.dataset.printSide === side));
     for (const button of root.querySelectorAll('[data-print-orientation]')) button.setAttribute('aria-pressed', String(button.dataset.printOrientation === orientation));
-    const message = [
-      'Игорь, привет! Хочу обсудить свой дизайн на одежде.',
-      `Формат: ${formatId}, ${w} × ${h} см`,
-      `Расположение: ${place.toLowerCase()}`,
-      `Ориентация: ${orientation === 'portrait' ? 'вертикальная' : 'горизонтальная'}`,
-      'Помогите подобрать способ нанесения.',
-    ].join('\n');
-    $('#discuss-print').href = `https://t.me/ig_alferov?text=${encodeURIComponent(message)}`;
+    for (const button of root.querySelectorAll('[data-print-method]')) button.setAttribute('aria-pressed', String(button.dataset.printMethod === methodId));
   }
   for (const button of root.querySelectorAll('[data-print-format]')) button.addEventListener('click', () => { formatId = button.dataset.printFormat; render(); });
   for (const button of root.querySelectorAll('[data-print-side]')) button.addEventListener('click', () => { side = button.dataset.printSide; render(); });
   for (const button of root.querySelectorAll('[data-print-orientation]')) button.addEventListener('click', () => { orientation = button.dataset.printOrientation; render(); });
+  for (const button of root.querySelectorAll('[data-print-method]')) button.addEventListener('click', () => { methodId = button.dataset.printMethod; render(); });
   render();
+  return { getSelection: () => ({ formatId, side, orientation, methodId }) };
 }

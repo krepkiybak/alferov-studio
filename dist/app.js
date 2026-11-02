@@ -1,7 +1,9 @@
 import { products, studio, formatPrice } from './catalog.js';
-import { prepareOrder, normalizePhone, normalizeTelegram, formatPhone } from './order.js';
-import { initPrintGuide } from './print-guide.js';
+import { prepareOrder, normalizePhone, normalizeTelegram } from './order.js';
+import { initPrintGuide } from './print-guide.js?v=20261102-project1';
 import { startTypography } from './typography.js';
+import { bindPhoneInput } from './phone-input.js';
+import { initProjectForm } from './project-form.js';
 
 const $ = (selector) => document.querySelector(selector);
 const dialog = $('#product-dialog');
@@ -185,51 +187,7 @@ function clearFormError() {
   $('#phone').removeAttribute('aria-invalid');
   $('#telegram').removeAttribute('aria-invalid');
 }
-const phoneInput = $('#phone');
-function formatPhoneField() {
-  const raw = phoneInput.value;
-  const caret = phoneInput.selectionStart ?? raw.length;
-  const formatted = formatPhone(raw);
-  const addedDigits = Math.max(0, formatted.replace(/\D/g, '').length - raw.replace(/\D/g, '').length);
-  const digitsBeforeCaret = raw.slice(0, caret).replace(/\D/g, '').length + addedDigits;
-  let nextCaret = formatted.length;
-  if (caret < raw.length) {
-    let digitsSeen = 0;
-    nextCaret = formatted.startsWith('+') ? 1 : 0;
-    for (let index = 0; index < formatted.length && digitsSeen < digitsBeforeCaret; index++) {
-      if (/\d/.test(formatted[index])) digitsSeen++;
-      nextCaret = index + 1;
-    }
-  }
-  phoneInput.value = formatted;
-  phoneInput.setSelectionRange(nextCaret, nextCaret);
-}
-phoneInput.addEventListener('focus', () => {
-  if (!phoneInput.value) phoneInput.value = '+7 ';
-});
-phoneInput.addEventListener('blur', () => {
-  if (['+', '+7'].includes(phoneInput.value.trim())) phoneInput.value = '';
-});
-phoneInput.addEventListener('input', (event) => {
-  if (!event.isComposing) formatPhoneField();
-  clearFormError();
-});
-// Deleting a separator also deletes the adjacent digit, so Backspace and Delete
-// keep working naturally when the customer edits the middle of a number.
-phoneInput.addEventListener('beforeinput', (event) => {
-  const backward = event.inputType === 'deleteContentBackward';
-  const forward = event.inputType === 'deleteContentForward';
-  const start = phoneInput.selectionStart;
-  if ((!backward && !forward) || start === null || start !== phoneInput.selectionEnd) return;
-  let index = backward ? start - 1 : start;
-  if (phoneInput.value[index] !== ' ') return;
-  while (phoneInput.value[index] === ' ') index += backward ? -1 : 1;
-  if (index < 1 || index >= phoneInput.value.length) return;
-  event.preventDefault();
-  phoneInput.setRangeText('', index, index + 1, 'start');
-  formatPhoneField();
-  clearFormError();
-});
+bindPhoneInput($('#phone'), clearFormError);
 $('#telegram').addEventListener('input', clearFormError);
 $('#order-form').addEventListener('submit', (event) => {
   event.preventDefault();
@@ -276,5 +234,6 @@ $('#mobile-nav').addEventListener('click', (event) => {
   }
 });
 $('#year').textContent = new Date().getFullYear();
-initPrintGuide();
+const printGuide = initPrintGuide();
+initProjectForm({ getPrintSelection: () => printGuide.getSelection() });
 startTypography();
