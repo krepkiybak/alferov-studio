@@ -7,7 +7,7 @@ import { printFormats, getPrintPreview, formatCentimetres } from '../dist/print-
 import { keepShortWords } from '../dist/typography.js';
 
 test('Print formats use verified dimensions and preserve their proportions in either orientation', () => {
-  assert.deepEqual(printFormats.map(({id,widthMm,heightMm})=>[id,widthMm,heightMm]), [['A6',105,148],['A5',148,210],['A4',210,297],['A3',297,420],['A3+',329,483]]);
+  assert.deepEqual(printFormats.map(({id,widthMm,heightMm})=>[id,widthMm,heightMm]), [['A7',74,105],['A6',105,148],['A5',148,210],['A4',210,297],['A3',297,420],['A3+',329,483]]);
   for (const format of printFormats) for (const side of ['front','back']) {
     const portrait = getPrintPreview(format.id, side);
     const landscape = getPrintPreview(format.id, side, 'landscape');

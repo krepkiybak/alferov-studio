@@ -76,3 +76,13 @@ p,li{text-wrap:pretty}h1,h2,h3{text-wrap:balance}
 @media(max-width:640px){.about-section .portrait-wrap{max-width:260px;justify-self:center}.print-guide{margin-top:42px;padding-top:35px}.print-guide-heading{margin-bottom:29px}.print-guide-heading h3{font-size:33px}.print-guide-heading>p:last-child{font-size:12px}.print-guide-layout{grid-template-columns:1fr;gap:30px}.print-stage{grid-row:1;padding:36px 8px 24px}.print-stage-label{font-size:6px;top:17px;left:18px}.print-stage-caption{font-size:8px;padding:0 15px}.print-control>p{font-size:12px}.print-options button{font-size:12px;min-height:44px}.print-size-options{gap:7px}.print-size-options button{flex:1;min-width:0;padding-inline:8px}.print-guide-note{font-size:10px}.method-row summary{font-size:19px}.method-row p{font-size:12px}.methods-note{font-size:10px}.custom-heading .custom-projects{font-size:11px}.print-guide-controls>.button{width:100%}}
 @media(max-width:640px){.print-guide-layout{display:flex;flex-direction:column;gap:20px}.print-guide-controls{display:contents}.print-control{order:1;margin:0;align-self:stretch}.print-selection{order:2;align-self:stretch;margin:4px 0 0;padding-block:14px}.print-stage{order:3;align-self:stretch}.print-guide-note{order:4;margin:0;max-width:none}#discuss-print{order:5;align-self:stretch;margin-top:4px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+.site-header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+.site-header .brand{justify-self:start;white-space:nowrap}
+.desktop-nav{grid-column:2;justify-self:center}
+.application-methods{border-top:1px solid #25252133;margin-top:65px;padding-top:42px}
+.application-methods>h3{font-size:34px;line-height:1.15;letter-spacing:-.045em;margin:0 0 28px}
+.methods-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;border-bottom:1px solid #25252133}
+.methods-grid .method-row:last-of-type{border-bottom:0}
+.methods-grid .method-row p{max-width:480px}
+@media(min-width:641px) and (max-width:900px){.site-header{height:auto;min-height:130px;grid-template-columns:1fr;gap:18px;padding-block:22px}.site-header .brand{justify-self:center}.desktop-nav{grid-column:1}}
+@media(max-width:640px){.site-header{display:flex}.mobile-nav{align-items:center;text-align:center}.application-methods{margin-top:42px;padding-top:35px}.application-methods>h3{font-size:30px;margin-bottom:24px}.methods-grid{grid-template-columns:1fr}.print-size-options{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}.print-size-options button{padding-inline:4px}}
