@@ -1,6 +1,6 @@
 import { studio } from './catalog.js';
 import { applicationMethods } from './methods.js';
-import { prepareProjectRequest, describePrintSelection } from './project.js';
+import { prepareProjectRequest, describePrintSelection } from './project.js?v=20261103-editor1';
 import { bindPhoneInput } from './phone-input.js';
 
 export function initProjectForm({ getPrintSelection } = {}) {
