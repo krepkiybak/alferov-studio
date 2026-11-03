@@ -1,12 +1,23 @@
 import { studio } from './catalog.js';
 import { normalizePhone, normalizeTelegram } from './order.js';
 import { applicationMethods } from './methods.js';
-import { getPrintPreview, formatCentimetres } from './print-guide.js?v=20261102-project1';
+import { getPrintPreview, getCustomPrintLayout, formatCentimetres } from './print-layout.js';
 
 const designStates = { help: 'Нужна помощь с макетом', ready: 'Есть готовый макет', sketch: 'Есть эскиз или референс' };
 const invalid = (field, message) => Object.assign(new Error(message), { field });
 
 export function describePrintSelection(selection) {
+  if ('widthMm' in selection || 'heightMm' in selection) {
+    const layout = getCustomPrintLayout(selection);
+    const horizontal = layout.offsetXMm === 0 ? 'посередине футболки' : `${formatCentimetres(Math.abs(layout.offsetXMm))} см ${layout.offsetXMm < 0 ? 'левее' : 'правее'} середины футболки`;
+    return [
+      `Размер принта: ${formatCentimetres(layout.widthMm)} × ${formatCentimetres(layout.heightMm)} см`,
+      `Ближайший формат: примерно ${layout.formatId}`,
+      `Расположение: ${layout.side === 'front' ? 'на груди' : 'на спине'}`,
+      `Центр по горизонтали: ${horizontal}`,
+      `Верхняя граница: ${formatCentimetres(layout.topMm)} см от верхнего края футболки`,
+    ];
+  }
   const layout = getPrintPreview(selection.formatId, selection.side, selection.orientation);
   return [
     `Формат: ${layout.formatId}, ${formatCentimetres(layout.widthMm)} × ${formatCentimetres(layout.heightMm)} см`,

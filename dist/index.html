@@ -16,8 +16,8 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preload" as="font" href="assets/golos-cyrillic.woff2" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="assets/milk-express.webp">
-  <link rel="stylesheet" href="styles.css?v=20261102-project1">
-  <script type="module" src="app.js?v=20261102-project1"></script>
+  <link rel="stylesheet" href="styles.css?v=20261103-editor1">
+  <script type="module" src="app.js?v=20261103-editor1"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalog">Перейти к каталогу</a>
@@ -84,34 +84,49 @@
       </div>
 
       <div class="shell print-guide" aria-labelledby="print-guide-title">
-        <div class="print-guide-heading"><p class="eyebrow">РАЗМЕР И РАСПОЛОЖЕНИЕ</p><h3 id="print-guide-title">Примерьте свой принт.</h3><p>Выберите формат и сторону футболки. Схема покажет, сколько места займёт рисунок.</p></div>
+        <div class="print-guide-heading"><p class="eyebrow">РАЗМЕР И РАСПОЛОЖЕНИЕ</p><h3 id="print-guide-title">Примерьте свой принт.</h3><p>Выберите форму и сторону футболки. Перемещайте область принта и меняйте её размер за углы или задайте точные значения в сантиметрах.</p></div>
         <div class="print-guide-layout">
           <div class="print-guide-controls">
-            <div class="print-control"><p>Способ нанесения</p><div class="print-options print-method-options" id="print-method-options" role="group" aria-label="Способ нанесения"></div></div>
-            <div class="print-control"><p>Формат нанесения</p><div class="print-options print-size-options" role="group" aria-label="Формат принта"><button type="button" data-print-format="A7" aria-pressed="false">A7</button><button type="button" data-print-format="A6" aria-pressed="false">A6</button><button type="button" data-print-format="A5" aria-pressed="false">A5</button><button type="button" data-print-format="A4" aria-pressed="true">A4</button><button type="button" data-print-format="A3" aria-pressed="false">A3</button><button type="button" data-print-format="A3+" aria-pressed="false">A3+</button></div></div>
-            <div class="print-control"><p>Расположение</p><div class="print-options" role="group" aria-label="Сторона футболки"><button type="button" data-print-side="front" aria-pressed="true">На груди</button><button type="button" data-print-side="back" aria-pressed="false">На спине</button></div></div>
-            <div class="print-control"><p>Ориентация</p><div class="print-options" role="group" aria-label="Ориентация принта"><button type="button" data-print-orientation="portrait" aria-pressed="true">Вертикально</button><button type="button" data-print-orientation="landscape" aria-pressed="false">Горизонтально</button></div></div>
-            <div class="print-selection" aria-live="polite"><strong id="print-current-format">A4</strong><div><span id="print-dimensions">21 × 29,7 см</span><span id="print-placement-label">На груди</span><span id="print-method-label" hidden></span></div></div>
-            <p class="print-guide-note">Показано по центру условной футболки: ширина полочки 54 см, длина 74 см. Посадка и размер вещи меняют впечатление от принта. Точное положение согласуем по макету.</p>
-            <p class="print-guide-note">Для A3+ в схеме принят размер 32,9 × 48,3 см. Фактическая область нанесения зависит от технологии и оборудования.</p>
+            <div class="print-control print-method-control"><p>Способ нанесения</p><div class="print-options print-method-options" id="print-method-options" role="group" aria-label="Способ нанесения"></div></div>
+            <div class="print-control print-shape-control"><p>Форма для примерки</p><div class="print-options print-shape-options" role="group" aria-label="Форма области"><button type="button" data-print-shape="rectangle" aria-pressed="true">Прямоугольник</button><button type="button" data-print-shape="circle" aria-pressed="false">Круг</button><button type="button" data-print-shape="ellipse" aria-pressed="false">Овал</button></div></div>
+            <div class="print-control print-preset-control"><p>Быстрый размер</p><div class="print-options print-size-options" role="group" aria-label="Формат принта"><button type="button" data-print-format="A7" aria-pressed="false">A7</button><button type="button" data-print-format="A6" aria-pressed="false">A6</button><button type="button" data-print-format="A5" aria-pressed="false">A5</button><button type="button" data-print-format="A4" aria-pressed="true">A4</button><button type="button" data-print-format="A3" aria-pressed="false">A3</button><button type="button" data-print-format="A3+" aria-pressed="false">A3+</button></div></div>
+            <div class="print-control print-side-control"><p>Расположение</p><div class="print-options" role="group" aria-label="Сторона футболки"><button type="button" data-print-side="front" aria-pressed="true">На груди</button><button type="button" data-print-side="back" aria-pressed="false">На спине</button></div></div>
+            <div class="print-control print-orientation-control"><p>Ориентация</p><div class="print-options" role="group" aria-label="Ориентация принта"><button type="button" data-print-orientation="portrait" aria-pressed="true">Вертикально</button><button type="button" data-print-orientation="landscape" aria-pressed="false">Горизонтально</button></div></div>
+            <div class="print-metrics">
+              <div><label for="print-width-input" id="print-width-label-text">Ширина, см</label><input id="print-width-input" type="number" min="0.1" max="48.3" step="0.1" value="21" inputmode="decimal"></div>
+              <div><label for="print-height-input">Высота, см</label><input id="print-height-input" type="number" min="0.1" max="48.3" step="0.1" value="29.7" inputmode="decimal"></div>
+              <div><label for="print-offset-input">Центр по горизонтали, см</label><input id="print-offset-input" type="number" min="-42" max="42" step="0.1" value="0" inputmode="decimal" aria-describedby="print-coordinate-help"></div>
+              <div><label for="print-top-input">От верхнего края, см</label><input id="print-top-input" type="number" min="0" max="74" step="0.1" value="17.7" inputmode="decimal" aria-describedby="print-coordinate-help"></div>
+              <p id="print-coordinate-help">Отрицательное смещение ведёт влево от середины футболки, положительное вправо.</p>
+            </div>
+            <div class="print-selection" aria-live="polite"><div class="print-format-summary"><span>Ближайший формат</span><strong id="print-current-format">≈ A4</strong></div><div><span id="print-dimensions">21 × 29,7 см</span><span id="print-placement-label">На груди</span><span id="print-method-label" hidden></span><span id="print-position-label"></span></div></div>
+            <p class="print-guide-note">Примерка на условной футболке: ширина полочки 54 см, длина 74 см. Посадка и размер вещи меняют впечатление от принта. Точное положение согласуем по макету.</p>
+            <p class="print-guide-note">Максимальная область в примерке: A3+, 32,9 × 48,3 см в любом повороте. Фактическая область нанесения зависит от технологии и оборудования.</p>
             <button class="button button-dark" id="discuss-print" type="button" data-open-project data-project-source="preview">Обсудить этот вариант <span aria-hidden="true">↗</span></button>
           </div>
           <div class="print-stage">
             <span class="print-stage-label">ВАШ ДИЗАЙН В МАСШТАБЕ</span>
-            <svg id="print-preview" viewBox="0 0 600 560" role="img" aria-labelledby="print-preview-title print-preview-description">
+            <svg id="print-preview" viewBox="0 0 600 560" role="group" aria-labelledby="print-preview-title print-preview-description">
               <title id="print-preview-title">Пример расположения принта на футболке</title><desc id="print-preview-description">Формат A4 на груди условной футболки.</desc>
               <path id="shirt-body" class="shirt-shape" d="M228 60 C240 91 265 107 300 107 C335 107 360 91 372 60 L448 79 552 211 480 253 462 222 462 504 138 504 138 222 120 253 48 211 152 79Z"/>
               <path id="shirt-neck-front" class="shirt-seam" d="M222 62 C235 99 264 115 300 115 C336 115 365 99 378 62"/>
               <path id="shirt-neck-back" class="shirt-seam" d="M223 62 Q300 100 377 62" hidden/>
               <path class="shirt-seam" d="M145 494H455 M58 206 121 243 M479 243 542 206"/>
+              <path class="print-center-line" d="M300 120V494"/>
               <line id="print-width-line" class="print-dimension-line" x1="237" x2="363" y1="149" y2="149"/>
               <text id="print-width-label" class="print-dimension-label" x="300" y="141" text-anchor="middle">21 см</text>
               <line id="print-height-line" class="print-dimension-line" x1="220" x2="220" y1="166" y2="344.2"/>
               <text id="print-height-label" class="print-dimension-label" x="212" y="255.1" text-anchor="middle" transform="rotate(-90 212 255.1)">29,7 см</text>
               <rect id="print-area" x="237" y="166" width="126" height="178.2" rx="1"/>
               <text id="print-area-label" x="300" y="261.1" text-anchor="middle">A4</text>
+              <rect id="print-area-hit" x="231" y="160" width="138" height="190.2" fill="transparent" tabindex="0" role="button" aria-label="Переместить область принта" aria-describedby="print-interaction-help"/>
+              <g data-print-resize="nw" tabindex="0" role="button" aria-label="Изменить размер: верхний левый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
+              <g data-print-resize="ne" tabindex="0" role="button" aria-label="Изменить размер: верхний правый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
+              <g data-print-resize="sw" tabindex="0" role="button" aria-label="Изменить размер: нижний левый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
+              <g data-print-resize="se" tabindex="0" role="button" aria-label="Изменить размер: нижний правый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
             </svg>
-            <span class="print-stage-caption">Область цвета показывает границы принта, а не форму самого рисунка.</span>
+            <div class="print-stage-actions"><button class="circle-button" type="button" data-print-scale="0.9" aria-label="Уменьшить область принта">−</button><button class="circle-button" type="button" data-print-scale="1.1" aria-label="Увеличить область принта">+</button><button class="print-reset" id="print-reset" type="button">Сбросить примерку</button></div>
+            <span class="print-stage-caption" id="print-interaction-help">Тяните область, чтобы переместить, и углы, чтобы изменить размер. Можно использовать стрелки на клавиатуре; Shift увеличивает шаг.</span>
           </div>
         </div>
       </div>

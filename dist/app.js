@@ -1,9 +1,9 @@
 import { products, studio, formatPrice } from './catalog.js';
 import { prepareOrder, normalizePhone, normalizeTelegram } from './order.js';
-import { initPrintGuide } from './print-guide.js?v=20261102-project1';
+import { initPrintGuide } from './print-guide.js?v=20261103-editor1';
 import { startTypography } from './typography.js';
 import { bindPhoneInput } from './phone-input.js';
-import { initProjectForm } from './project-form.js';
+import { initProjectForm } from './project-form.js?v=20261103-editor1';
 
 const $ = (selector) => document.querySelector(selector);
 const dialog = $('#product-dialog');
