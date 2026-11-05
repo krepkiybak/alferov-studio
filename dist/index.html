@@ -16,8 +16,8 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preload" as="font" href="assets/golos-cyrillic.woff2" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="assets/milk-express.webp">
-  <link rel="stylesheet" href="styles.css?v=20261103-editor1">
-  <script type="module" src="app.js?v=20261103-editor1"></script>
+  <link rel="stylesheet" href="styles.css?v=20261105-layout1">
+  <script type="module" src="app.js?v=20261105-layout1"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalog">Перейти к каталогу</a>
@@ -76,36 +76,117 @@
       <div class="shell application-methods" aria-labelledby="methods-title">
         <h3 id="methods-title">Способы нанесения.</h3>
         <div class="methods-grid">
-          <details class="method-row"><summary>Шелкография <span aria-hidden="true">+</span></summary><p>Краска проходит через трафарет. Этот способ удобно рассмотреть для повторяющихся рисунков, логотипов и тиражей.</p></details>
-          <details class="method-row"><summary>Прямая печать (DTG) <span aria-hidden="true">+</span></summary><p>Изображение печатают непосредственно по ткани. Подходит для иллюстраций с деталями, оттенками и плавными переходами цвета.</p></details>
-          <details class="method-row"><summary>DTF-печать <span aria-hidden="true">+</span></summary><p>Дизайн сначала печатают на специальной плёнке, затем переносят на одежду термопрессом. Материал и режим переноса подбирают под изделие.</p></details>
-          <details class="method-row"><summary>Вышивка <span aria-hidden="true">+</span></summary><p>Дизайн создают нитями. Можно обсудить надпись, логотип или небольшой акцент с объёмной фактурой.</p></details>
+          <article class="method-card">
+            <h4>Шелкография</h4>
+            <figure class="method-illustration">
+              <svg viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+                <defs><pattern id="screen-mesh" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M5 0H0V5" fill="none" stroke="#ad8b72" stroke-width=".6"/></pattern></defs>
+                <rect x="23" y="27" width="107" height="67" rx="4" fill="#dcc0a5" stroke="#77614e"/>
+                <rect x="31" y="35" width="91" height="51" rx="1" fill="#f7ecdc"/>
+                <rect x="31" y="35" width="91" height="51" rx="1" fill="url(#screen-mesh)"/>
+                <path d="M57 66C57 44 78 42 79 62C93 49 104 67 87 75C74 81 65 75 57 66Z" fill="#b95137"/>
+                <path d="M44 37L94 15L99 25L49 47Z" fill="#3c4038"/><path d="M50 47L100 25L102 30L52 52Z" fill="#f1d2ae"/>
+                <path class="method-arrow" d="M147 60H174M166 53L174 60L166 67"/>
+                <path d="M194 31H286L293 39L286 45L293 51L286 57L293 63L286 69L293 75L286 81L293 87H194Z" fill="#f7f0e5" stroke="#bfa88f"/>
+                <path d="M221 63C221 41 242 39 243 59C257 46 268 64 251 72C238 78 229 72 221 63Z" fill="#b95137"/>
+              </svg>
+              <figcaption><span>Сетка с трафаретом</span><span aria-hidden="true">→</span><span>Краска на ткани</span></figcaption>
+            </figure>
+            <p>Краску продавливают через открытые участки сетки. Так удобно повторять один рисунок в тираже.</p>
+          </article>
+          <article class="method-card">
+            <h4>Прямая печать (DTG)</h4>
+            <figure class="method-illustration">
+              <svg viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+                <defs><linearGradient id="dtg-ink" x2="1" y2="1"><stop stop-color="#dfac57"/><stop offset=".5" stop-color="#bf5a3f"/><stop offset="1" stop-color="#855675"/></linearGradient></defs>
+                <path d="M39 18H112V41H39Z" fill="#4c5649"/><rect x="49" y="41" width="53" height="9" rx="2" fill="#808c74"/>
+                <path d="M52 57V65M65 59V70M77 57V66M90 59V70M101 57V65" stroke="#b75f47" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 5"/>
+                <path d="M29 79H118L128 91H19Z" fill="#f8efe0" stroke="#ab957c"/><path d="M19 91H128V99H19Z" fill="#b5a48d"/>
+                <path d="M55 83C63 75 81 77 91 83L83 87H60Z" fill="url(#dtg-ink)"/>
+                <path class="method-arrow" d="M147 60H174M166 53L174 60L166 67"/>
+                <path d="M194 31H286L293 39L286 45L293 51L286 57L293 63L286 69L293 75L286 81L293 87H194Z" fill="#f7f0e5" stroke="#bfa88f"/>
+                <path d="M221 63C221 41 242 39 243 59C257 46 268 64 251 72C238 78 229 72 221 63Z" fill="url(#dtg-ink)"/>
+                <path d="M232 59C232 53 235 50 237 50M244 65L253 60" fill="none" stroke="#fff3cf" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+              <figcaption><span>Печатающая головка</span><span aria-hidden="true">→</span><span>Цвет на ткани</span></figcaption>
+            </figure>
+            <p>Принтер наносит чернила прямо на изделие. Можно передать мелкие детали и плавные переходы цвета.</p>
+          </article>
+          <article class="method-card">
+            <h4>DTF-печать</h4>
+            <figure class="method-illustration">
+              <svg viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+                <path d="M21 79H120L132 94H29Z" fill="#f7efdf" stroke="#bfa88f"/>
+                <path d="M30 25H111L126 69H45Z" fill="#f9f8ed" fill-opacity=".7" stroke="#857d6a" stroke-dasharray="4 3"/>
+                <path d="M58 51C54 35 72 34 78 48C88 38 101 51 89 58C79 63 67 58 58 51Z" fill="#965477"/>
+                <path d="M91 54C103 50 108 58 101 63C93 68 86 61 91 54Z" fill="#c98155"/>
+                <path class="method-arrow" d="M147 60H174M166 53L174 60L166 67"/>
+                <path d="M199 31H283V42H199Z" fill="#586156"/><path d="M239 31L251 18H281" fill="none" stroke="#586156" stroke-width="5" stroke-linecap="round"/>
+                <path d="M220 52Q216 57 220 62T220 72M241 52Q237 57 241 62T241 72M262 52Q258 57 262 62T262 72" fill="none" stroke="#b95137" stroke-width="2" stroke-linecap="round"/>
+                <path d="M202 80H284L294 92H191Z" fill="#f7f0e5" stroke="#bfa88f"/><path d="M191 92H294V101H191Z" fill="#687361"/>
+                <path d="M227 85Q234 79 241 84Q249 79 257 84L253 88H229Z" fill="#965477"/>
+              </svg>
+              <figcaption><span>Плёнка с рисунком</span><span aria-hidden="true">→</span><span>Перенос термопрессом</span></figcaption>
+            </figure>
+            <p>Сначала рисунок печатают на плёнке. Под нагревом и давлением он переносится на изделие.</p>
+          </article>
+          <article class="method-card">
+            <h4>Вышивка</h4>
+            <figure class="method-illustration">
+              <svg viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+                <path d="M39 34H80L84 84H35Z" fill="#a7644c"/><path d="M39 41L80 36M38 50L81 44M38 58L82 52M37 67L83 60M36 76L83 68M36 84L84 76" fill="none" stroke="#e6ae90" stroke-width="2"/>
+                <ellipse cx="59" cy="34" rx="24" ry="7" fill="#704635"/><ellipse cx="59" cy="84" rx="27" ry="7" fill="#704635"/>
+                <path d="M81 65C101 61 104 85 114 80C129 74 115 61 113 50" fill="none" stroke="#a7644c" stroke-width="2"/>
+                <path d="M123 22L108 78" stroke="#5f625b" stroke-width="3" stroke-linecap="round"/><ellipse cx="121" cy="31" rx="1.7" ry="4" transform="rotate(15 121 31)" fill="#f6e2cf"/>
+                <path class="method-arrow" d="M147 60H174M166 53L174 60L166 67"/>
+                <circle cx="243" cy="62" r="39" fill="#f7efe1" stroke="#805f47" stroke-width="4"/><circle cx="243" cy="62" r="33" fill="none" stroke="#c69c77" stroke-width="2"/><path d="M234 24V17H252V24" fill="none" stroke="#805f47" stroke-width="3"/>
+                <path d="M225 61Q225 49 234 46M229 64Q227 52 236 47M233 67Q231 53 239 49M237 69Q234 56 242 52M241 71Q241 58 252 53M246 72Q246 60 259 56M250 72Q251 63 262 60M254 71L264 64M257 69L265 67" fill="none" stroke="#a7513e" stroke-width="2.3" stroke-linecap="round"/>
+              </svg>
+              <figcaption><span>Игла с нитью</span><span aria-hidden="true">→</span><span>Объёмные стежки</span></figcaption>
+            </figure>
+            <p>Машина прокладывает стежки по рисунку. Нити дают рельефную фактуру логотипу, надписи или рисунку.</p>
+          </article>
         </div>
       </div>
 
       <div class="shell print-guide" aria-labelledby="print-guide-title">
-        <div class="print-guide-heading"><p class="eyebrow">РАЗМЕР И РАСПОЛОЖЕНИЕ</p><h3 id="print-guide-title">Примерьте свой принт.</h3><p>Выберите форму и сторону футболки. Перемещайте область принта и меняйте её размер за углы или задайте точные значения в сантиметрах.</p></div>
+        <div class="print-guide-heading">
+          <p class="eyebrow">РАЗМЕР И РАСПОЛОЖЕНИЕ</p>
+          <h3 id="print-guide-title">Примерьте свой принт.</h3>
+          <p>Соберите раскладку отдельно на груди и на спине. Выберите принт, перетащите его по ткани и потяните за углы, чтобы изменить размер.</p>
+        </div>
         <div class="print-guide-layout">
           <div class="print-guide-controls">
-            <div class="print-control print-method-control"><p>Способ нанесения</p><div class="print-options print-method-options" id="print-method-options" role="group" aria-label="Способ нанесения"></div></div>
-            <div class="print-control print-shape-control"><p>Форма для примерки</p><div class="print-options print-shape-options" role="group" aria-label="Форма области"><button type="button" data-print-shape="rectangle" aria-pressed="true">Прямоугольник</button><button type="button" data-print-shape="circle" aria-pressed="false">Круг</button><button type="button" data-print-shape="ellipse" aria-pressed="false">Овал</button></div></div>
-            <div class="print-control print-preset-control"><p>Быстрый размер</p><div class="print-options print-size-options" role="group" aria-label="Формат принта"><button type="button" data-print-format="A7" aria-pressed="false">A7</button><button type="button" data-print-format="A6" aria-pressed="false">A6</button><button type="button" data-print-format="A5" aria-pressed="false">A5</button><button type="button" data-print-format="A4" aria-pressed="true">A4</button><button type="button" data-print-format="A3" aria-pressed="false">A3</button><button type="button" data-print-format="A3+" aria-pressed="false">A3+</button></div></div>
-            <div class="print-control print-side-control"><p>Расположение</p><div class="print-options" role="group" aria-label="Сторона футболки"><button type="button" data-print-side="front" aria-pressed="true">На груди</button><button type="button" data-print-side="back" aria-pressed="false">На спине</button></div></div>
-            <div class="print-control print-orientation-control"><p>Ориентация</p><div class="print-options" role="group" aria-label="Ориентация принта"><button type="button" data-print-orientation="portrait" aria-pressed="true">Вертикально</button><button type="button" data-print-orientation="landscape" aria-pressed="false">Горизонтально</button></div></div>
-            <div class="print-metrics">
+            <div class="print-control print-side-control">
+              <p>Сторона футболки</p>
+              <div class="print-options print-side-options" role="group" aria-label="Сторона футболки">
+                <button type="button" data-print-side="front" aria-pressed="true">На груди <span class="print-side-count" aria-hidden="true">1</span></button>
+                <button type="button" data-print-side="back" aria-pressed="false">На спине <span class="print-side-count" aria-hidden="true">0</span></button>
+              </div>
+              <div class="print-options print-parts" id="print-parts" role="group" aria-label="Выбрать принт для правки"></div>
+              <div class="print-list-actions">
+                <button type="button" id="print-add" class="print-add">+ Дополнительный принт</button>
+                <button type="button" id="print-remove" class="print-remove">Удалить выбранный</button>
+              </div>
+              <p id="print-limit" class="print-guide-note" hidden>На одной стороне помещается до четырёх областей.</p>
+            </div>
+            <div class="print-control print-shape-control" data-print-active><p>Форма для примерки</p><div class="print-options print-shape-options" role="group" aria-label="Форма области"><button type="button" data-print-shape="rectangle" aria-pressed="true">Прямоугольник</button><button type="button" data-print-shape="circle" aria-pressed="false">Круг</button><button type="button" data-print-shape="ellipse" aria-pressed="false">Овал</button></div></div>
+            <div class="print-control print-preset-control" data-print-active><p>Быстрый размер</p><div class="print-options print-size-options" role="group" aria-label="Формат принта"><button type="button" data-print-format="A7" aria-pressed="false">A7</button><button type="button" data-print-format="A6" aria-pressed="false">A6</button><button type="button" data-print-format="A5" aria-pressed="false">A5</button><button type="button" data-print-format="A4" aria-pressed="true">A4</button><button type="button" data-print-format="A3" aria-pressed="false">A3</button><button type="button" data-print-format="A3+" aria-pressed="false">A3+</button></div></div>
+            <div class="print-control print-orientation-control" data-print-active><p>Ориентация</p><div class="print-options" role="group" aria-label="Ориентация принта"><button type="button" data-print-orientation="portrait" aria-pressed="true">Вертикально</button><button type="button" data-print-orientation="landscape" aria-pressed="false">Горизонтально</button></div></div>
+            <div class="print-metrics" data-print-active>
               <div><label for="print-width-input" id="print-width-label-text">Ширина, см</label><input id="print-width-input" type="number" min="0.1" max="48.3" step="0.1" value="21" inputmode="decimal"></div>
               <div><label for="print-height-input">Высота, см</label><input id="print-height-input" type="number" min="0.1" max="48.3" step="0.1" value="29.7" inputmode="decimal"></div>
               <div><label for="print-offset-input">Центр по горизонтали, см</label><input id="print-offset-input" type="number" min="-42" max="42" step="0.1" value="0" inputmode="decimal" aria-describedby="print-coordinate-help"></div>
               <div><label for="print-top-input">От верхнего края, см</label><input id="print-top-input" type="number" min="0" max="74" step="0.1" value="17.7" inputmode="decimal" aria-describedby="print-coordinate-help"></div>
               <p id="print-coordinate-help">Отрицательное смещение ведёт влево от середины футболки, положительное вправо.</p>
             </div>
-            <div class="print-selection" aria-live="polite"><div class="print-format-summary"><span>Ближайший формат</span><strong id="print-current-format">≈ A4</strong></div><div><span id="print-dimensions">21 × 29,7 см</span><span id="print-placement-label">На груди</span><span id="print-method-label" hidden></span><span id="print-position-label"></span></div></div>
+            <div class="print-selection" aria-live="polite" data-print-active><div class="print-format-summary"><span>Ближайший формат</span><strong id="print-current-format">≈ A4</strong></div><div><span id="print-dimensions">21 × 29,7 см</span><span id="print-placement-label">Принт 1 · на груди</span><span id="print-position-label"></span></div></div>
+            <div class="print-control print-method-control"><p>Способ нанесения для заказа</p><div class="print-options print-method-options" id="print-method-options" role="group" aria-label="Способ нанесения"></div></div>
             <p class="print-guide-note">Примерка на условной футболке: ширина полочки 54 см, длина 74 см. Посадка и размер вещи меняют впечатление от принта. Точное положение согласуем по макету.</p>
-            <p class="print-guide-note">Максимальная область в примерке: A3+, 32,9 × 48,3 см в любом повороте. Фактическая область нанесения зависит от технологии и оборудования.</p>
-            <button class="button button-dark" id="discuss-print" type="button" data-open-project data-project-source="preview">Обсудить этот вариант <span aria-hidden="true">↗</span></button>
+            <p class="print-guide-note">Максимум для одного принта в примерке: A3+, 32,9 × 48,3 см в любом повороте. Фактическая область нанесения зависит от технологии и оборудования.</p>
           </div>
           <div class="print-stage">
-            <span class="print-stage-label">ВАШ ДИЗАЙН В МАСШТАБЕ</span>
+            <span class="print-stage-label" id="print-stage-label">На груди</span>
             <svg id="print-preview" viewBox="0 0 600 560" role="group" aria-labelledby="print-preview-title print-preview-description">
               <title id="print-preview-title">Пример расположения принта на футболке</title><desc id="print-preview-description">Формат A4 на груди условной футболки.</desc>
               <path id="shirt-body" class="shirt-shape" d="M228 60 C240 91 265 107 300 107 C335 107 360 91 372 60 L448 79 552 211 480 253 462 222 462 504 138 504 138 222 120 253 48 211 152 79Z"/>
@@ -113,22 +194,38 @@
               <path id="shirt-neck-back" class="shirt-seam" d="M223 62 Q300 100 377 62" hidden/>
               <path class="shirt-seam" d="M145 494H455 M58 206 121 243 M479 243 542 206"/>
               <path class="print-center-line" d="M300 120V494"/>
-              <line id="print-width-line" class="print-dimension-line" x1="237" x2="363" y1="149" y2="149"/>
-              <text id="print-width-label" class="print-dimension-label" x="300" y="141" text-anchor="middle">21 см</text>
-              <line id="print-height-line" class="print-dimension-line" x1="220" x2="220" y1="166" y2="344.2"/>
-              <text id="print-height-label" class="print-dimension-label" x="212" y="255.1" text-anchor="middle" transform="rotate(-90 212 255.1)">29,7 см</text>
-              <rect id="print-area" x="237" y="166" width="126" height="178.2" rx="1"/>
-              <text id="print-area-label" x="300" y="261.1" text-anchor="middle">A4</text>
-              <rect id="print-area-hit" x="231" y="160" width="138" height="190.2" fill="transparent" tabindex="0" role="button" aria-label="Переместить область принта" aria-describedby="print-interaction-help"/>
-              <g data-print-resize="nw" tabindex="0" role="button" aria-label="Изменить размер: верхний левый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
-              <g data-print-resize="ne" tabindex="0" role="button" aria-label="Изменить размер: верхний правый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
-              <g data-print-resize="sw" tabindex="0" role="button" aria-label="Изменить размер: нижний левый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
-              <g data-print-resize="se" tabindex="0" role="button" aria-label="Изменить размер: нижний правый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
+              <g id="print-other-areas" aria-hidden="true"></g>
+              <g data-print-active>
+                <line id="print-width-line" class="print-dimension-line" x1="237" x2="363" y1="149" y2="149"/>
+                <text id="print-width-label" class="print-dimension-label" x="300" y="141" text-anchor="middle">21 см</text>
+                <line id="print-height-line" class="print-dimension-line" x1="220" x2="220" y1="166" y2="344.2"/>
+                <text id="print-height-label" class="print-dimension-label" x="212" y="255.1" text-anchor="middle" transform="rotate(-90 212 255.1)">29,7 см</text>
+                <rect id="print-area" x="237" y="166" width="126" height="178.2" rx="0"/>
+                <circle id="print-area-badge" r="13"/>
+                <text id="print-area-label" text-anchor="middle">1</text>
+                <rect id="print-area-hit" x="231" y="160" width="138" height="190.2" fill="transparent" tabindex="0" role="button" aria-label="Переместить область принта" aria-describedby="print-interaction-help"/>
+                <g data-print-resize="nw" tabindex="0" role="button" aria-label="Изменить размер: верхний левый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
+                <g data-print-resize="ne" tabindex="0" role="button" aria-label="Изменить размер: верхний правый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
+                <g data-print-resize="sw" tabindex="0" role="button" aria-label="Изменить размер: нижний левый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
+                <g data-print-resize="se" tabindex="0" role="button" aria-label="Изменить размер: нижний правый угол"><circle r="18" class="print-handle-hit"/><circle r="6" class="print-handle"/></g>
+              </g>
             </svg>
-            <div class="print-stage-actions"><button class="circle-button" type="button" data-print-scale="0.9" aria-label="Уменьшить область принта">−</button><button class="circle-button" type="button" data-print-scale="1.1" aria-label="Увеличить область принта">+</button><button class="print-reset" id="print-reset" type="button">Сбросить примерку</button></div>
-            <span class="print-stage-caption" id="print-interaction-help">Тяните область, чтобы переместить, и углы, чтобы изменить размер. Можно использовать стрелки на клавиатуре; Shift увеличивает шаг.</span>
+            <p class="print-stage-caption" id="print-side-empty" hidden>Нажмите «Добавить принт», чтобы разметить эту сторону.</p>
+            <div class="print-stage-actions" data-print-active><button class="circle-button" type="button" data-print-scale="0.9" aria-label="Уменьшить область принта">−</button><button class="circle-button" type="button" data-print-scale="1.1" aria-label="Увеличить область принта">+</button><button class="print-reset" id="print-reset" type="button">Сбросить выбранный</button></div>
+            <span class="print-stage-caption" id="print-interaction-help" data-print-active>Выберите область на футболке, чтобы её изменить. Стрелки на клавиатуре перемещают область, а с Shift шаг больше.</span>
           </div>
         </div>
+        <section class="print-board" aria-labelledby="print-board-title">
+          <div class="print-board-heading">
+            <div><p class="eyebrow">ОБЕ СТОРОНЫ</p><h4 id="print-board-title">Макет заказа</h4></div>
+            <p id="print-board-count"></p>
+          </div>
+          <img id="print-sheet-preview" alt="Схема расположения принтов" width="1200" height="650">
+          <div class="print-board-footer">
+            <p>В заявке сохранятся размеры, координаты и схема всех областей.</p>
+            <button class="button button-dark" id="discuss-print" type="button" data-open-project data-project-source="preview">Обсудить этот вариант <span aria-hidden="true">↗</span></button>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -176,8 +273,18 @@
     </div>
     <div id="project-ready-step" hidden>
       <p class="eyebrow">ЗАПРОС ПОДГОТОВЛЕН</p><h2 id="project-ready-title">Отправим Игорю?</h2>
-      <p class="project-intro">Откройте Telegram и нажмите «Отправить» в чате. После отправки менеджер свяжется с вами в ближайшее время.</p>
-      <a class="button button-dark" id="project-send" href="https://t.me/ig_alferov" target="_blank" rel="noopener noreferrer">Отправить в Telegram <span aria-hidden="true">↗</span></a>
+      <p class="project-intro" id="project-ready-intro">Откройте Telegram и нажмите «Отправить» в чате. После отправки менеджер свяжется с вами в ближайшее время.</p>
+      <figure class="project-sheet" id="project-sheet" hidden>
+        <img id="project-sheet-image" alt="Схема всех принтов на груди и на спине">
+        <figcaption>Схема для заявки</figcaption>
+        <div class="project-sheet-actions">
+          <button class="copy-button" id="project-share-sheet" type="button" hidden>Поделиться схемой</button>
+          <a class="copy-button" id="project-download-sheet" download="alferov-print-layout.png" hidden>Скачать схему</a>
+          <button class="copy-button" id="project-copy-sheet" type="button" hidden>Скопировать картинку</button>
+        </div>
+        <p class="copy-status" id="project-sheet-status" role="status"></p>
+      </figure>
+      <a class="button button-dark" id="project-send" href="https://t.me/ig_alferov" target="_blank" rel="noopener noreferrer">Открыть Telegram <span aria-hidden="true">↗</span></a>
       <label class="project-message-label" for="project-message">Готовый текст вашего запроса</label><textarea id="project-message" readonly rows="10"></textarea>
       <button class="copy-button" id="project-copy" type="button">Скопировать запрос</button><p id="project-copy-status" class="copy-status" role="status"></p>
       <button class="back-button" id="project-edit" type="button">← Изменить ответы</button>

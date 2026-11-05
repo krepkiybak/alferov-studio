@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createPresetPrintArea, constrainPrintArea, resizePrintAreaAroundCenter, resizePrintAreaFromCorner, isPrintAreaAllowed, getCustomPrintLayout, getNearestPrintFormat, toSvgPrintArea } from '../dist/print-layout.js';
+import { createAdditionalPrintArea, createPresetPrintArea, constrainPrintArea, resizePrintAreaAroundCenter, resizePrintAreaFromCorner, isPrintAreaAllowed, getCustomPrintLayout, getNearestPrintFormat, toSvgPrintArea } from '../dist/print-layout.js';
 import { prepareProjectRequest } from '../dist/project.js';
 
 test('A3+ limits hold in both orientations and circles preserve a single diameter', () => {
@@ -79,4 +79,37 @@ test('Telegram records exact size and position but never adds the chosen preview
     assert.equal(new URL(result.url).searchParams.get('text'),result.text);
   }
   for (const selection of [{ ...createPresetPrintArea(), widthMm:500 }, { ...createPresetPrintArea(), offsetXMm:900 }, { ...createPresetPrintArea(), topMm:NaN }]) assert.throws(()=>prepareProjectRequest({ ...answers,selection }));
+});
+
+test('An additional print starts beside the existing print on the same side', () => {
+  const base = createPresetPrintArea('A4', 'front');
+  const extra = createAdditionalPrintArea('front', [base]);
+  const first = toSvgPrintArea(base);
+  const second = toSvgPrintArea(extra);
+
+  assert.equal(extra.side, base.side);
+  assert.ok(isPrintAreaAllowed(extra));
+  assert.ok(second.x + second.width <= first.x);
+  assert.equal(createAdditionalPrintArea('back', []).side, 'back');
+});
+
+test('One Telegram request includes every print on both sides with matching numbers', () => {
+  const front = { side: 'front', shape: 'rectangle', widthMm: 200, heightMm: 300, offsetXMm: -32, topMm: 150 };
+  const extra = createAdditionalPrintArea('front', [front]);
+  const back = { side: 'back', shape: 'ellipse', widthMm: 148, heightMm: 210, offsetXMm: 70, topMm: 250 };
+  const result = prepareProjectRequest({
+    idea: 'Логотипы для команды',
+    phone: '89991234567',
+    telegram: '@test_person',
+    selection: { areas: [back, front, extra] },
+  });
+  const [chestText, backText] = result.text.split('\nНа спине\n');
+
+  assert.match(chestText, /На груди\nПринт 1: 20 × 30 см, примерно A4/);
+  assert.match(chestText, /3,2 см левее середины футболки\. От верха: 15 см/);
+  assert.match(chestText, /Принт 2: 7,4 × 10,5 см, примерно A7/);
+  assert.match(backText, /Принт 1: 14,8 × 21 см, примерно A5/);
+  assert.match(backText, /7 см правее середины футболки\. От верха: 25 см/);
+  assert.doesNotMatch(result.text, /прямоугольник|круг|овал|rectangle|circle|ellipse/i);
+  assert.equal(new URL(result.url).searchParams.get('text'), result.text);
 });

@@ -1,20 +1,44 @@
 import { studio } from './catalog.js';
 import { normalizePhone, normalizeTelegram } from './order.js';
 import { applicationMethods } from './methods.js';
-import { getPrintPreview, getCustomPrintLayout, formatCentimetres } from './print-layout.js';
+import { formatCentimetres, getCustomPrintLayout, getPrintPreview, maxPrintsPerSide, printSideLabels } from './print-layout.js?v=20261105-layout1';
 
 const designStates = { help: 'Нужна помощь с макетом', ready: 'Есть готовый макет', sketch: 'Есть эскиз или референс' };
 const invalid = (field, message) => Object.assign(new Error(message), { field });
 
+function horizontalPosition(layout) {
+  if (layout.offsetXMm === 0) return 'посередине футболки';
+  const distance = formatCentimetres(Math.abs(layout.offsetXMm));
+  return `${distance} см ${layout.offsetXMm < 0 ? 'левее' : 'правее'} середины футболки`;
+}
+
 export function describePrintSelection(selection) {
+  if (Array.isArray(selection.areas)) {
+    const layouts = selection.areas.map(getCustomPrintLayout);
+    if (!layouts.length) throw new Error('Добавьте хотя бы один принт.');
+    const lines = ['Раскладка принтов'];
+    for (const [side, label] of Object.entries(printSideLabels)) {
+      const areas = layouts.filter(area => area.side === side);
+      if (areas.length > maxPrintsPerSide) throw new Error('Уменьшите количество принтов на одной стороне.');
+      if (!areas.length) continue;
+      lines.push('', label);
+      for (const [index, layout] of areas.entries()) {
+        const size = `${formatCentimetres(layout.widthMm)} × ${formatCentimetres(layout.heightMm)} см`;
+        lines.push(
+          `Принт ${index + 1}: ${size}, примерно ${layout.formatId}`,
+          `Центр: ${horizontalPosition(layout)}. От верха: ${formatCentimetres(layout.topMm)} см.`,
+        );
+      }
+    }
+    return lines;
+  }
   if ('widthMm' in selection || 'heightMm' in selection) {
     const layout = getCustomPrintLayout(selection);
-    const horizontal = layout.offsetXMm === 0 ? 'посередине футболки' : `${formatCentimetres(Math.abs(layout.offsetXMm))} см ${layout.offsetXMm < 0 ? 'левее' : 'правее'} середины футболки`;
     return [
       `Размер принта: ${formatCentimetres(layout.widthMm)} × ${formatCentimetres(layout.heightMm)} см`,
       `Ближайший формат: примерно ${layout.formatId}`,
       `Расположение: ${layout.side === 'front' ? 'на груди' : 'на спине'}`,
-      `Центр по горизонтали: ${horizontal}`,
+      `Центр по горизонтали: ${horizontalPosition(layout)}`,
       `Верхняя граница: ${formatCentimetres(layout.topMm)} см от верхнего края футболки`,
     ];
   }

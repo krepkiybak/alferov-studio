@@ -8,6 +8,9 @@ export const printFormats = [
 ];
 export const printLimits = { shortMm: 329, longMm: 483, minMm: 1 };
 export const printShapes = ['rectangle', 'circle', 'ellipse'];
+export const printSideLabels = { front: 'На груди', back: 'На спине' };
+export const printColors = ['#a4422f', '#386555', '#645284', '#285f7c'];
+export const maxPrintsPerSide = printColors.length;
 export const printScale = 0.6;
 export const garmentOrigin = { x: 300, y: 60 };
 const epsilon = 1e-7;
@@ -35,6 +38,22 @@ export function toSvgPrintArea(area) {
   const width = area.widthMm * printScale;
   const height = area.heightMm * printScale;
   return { width, height, x: garmentOrigin.x + area.offsetXMm * printScale - width / 2, y: garmentOrigin.y + area.topMm * printScale };
+}
+
+export function printShapeAttributes(area) {
+  const bounds = toSvgPrintArea(area);
+  return {
+    ...bounds,
+    rx: area.shape === 'rectangle' ? 0 : bounds.width / 2,
+    ry: area.shape === 'rectangle' ? 0 : bounds.height / 2,
+  };
+}
+
+export function shirtOutline(side) {
+  const neckline = side === 'front'
+    ? 'M228 60 C240 91 265 107 300 107 C335 107 360 91 372 60'
+    : 'M228 60 Q300 88 372 60';
+  return `${neckline} L448 79 552 211 480 253 462 222 462 504 138 504 138 222 120 253 48 211 152 79Z`;
 }
 
 // The polygon follows the same neckline, sleeves and hem as the rendered SVG.
@@ -158,6 +177,31 @@ export function createPresetPrintArea(formatId = 'A4', side = 'front', orientati
   const preset = getPrintPreview(formatId, side, orientation);
   const dimensions = boundedDimensions(shape === 'circle' ? Math.min(preset.widthMm,preset.heightMm) : preset.widthMm, preset.heightMm, shape);
   return constrainPrintArea({ ...dimensions, side, shape, offsetXMm: 0, topMm: (preset.y - garmentOrigin.y) / printScale + (preset.heightMm - dimensions.heightMm) / 2 });
+}
+
+export function createAdditionalPrintArea(side, areas) {
+  if (areas.length === 0) return createPresetPrintArea('A4', side);
+
+  const preset = createPresetPrintArea('A7', side);
+  const occupied = areas.map(toSvgPrintArea);
+  let best = preset;
+  let leastOverlap = Infinity;
+  for (const [offsetXMm, topMm] of [[-175, 175], [175, 175], [-175, 335], [175, 335], [-175, 505], [175, 505], [0, 585]]) {
+    const candidate = { ...preset, offsetXMm, topMm };
+    if (!isPrintAreaAllowed(candidate)) continue;
+    const box = toSvgPrintArea(candidate);
+    const overlap = occupied.reduce((sum, other) => {
+      const width = Math.max(0, Math.min(box.x + box.width, other.x + other.width) - Math.max(box.x, other.x));
+      const height = Math.max(0, Math.min(box.y + box.height, other.y + other.height) - Math.max(box.y, other.y));
+      return sum + width * height;
+    }, 0);
+    if (overlap === 0) return candidate;
+    if (overlap < leastOverlap) {
+      best = candidate;
+      leastOverlap = overlap;
+    }
+  }
+  return best;
 }
 
 export function resizePrintAreaAroundCenter(area, widthMm, heightMm) {
