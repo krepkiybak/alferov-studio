@@ -16,8 +16,8 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preload" as="font" href="assets/golos-cyrillic.woff2" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="assets/milk-express.webp">
-  <link rel="stylesheet" href="styles.css?v=20261105-layout1">
-  <script type="module" src="app.js?v=20261105-layout1"></script>
+  <link rel="stylesheet" href="styles.css?v=20261106-feedback1">
+  <script type="module" src="app.js?v=20261106-feedback1"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalog">Перейти к каталогу</a>
@@ -35,7 +35,7 @@
   <main>
     <section class="hero shell" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <h1 id="hero-title">Вещи с вашей<br><span class="serif-word">историей.</span><svg class="hero-spark" width="76" height="76" viewBox="0 0 76 76" aria-hidden="true"><path d="M38 0 45 24 65 11 52 31 76 38 52 45 65 65 45 52 38 76 31 52 11 65 24 45 0 38 24 31 11 11 31 24Z" fill="currentColor"/></svg></h1>
+        <h1 id="hero-title">Вещи с вашей<br><span class="serif-word">историей.</span><svg class="hero-mark" width="76" height="76" viewBox="216 37 55 42" aria-hidden="true" focusable="false"><use href="#screen-print-motif"/></svg></h1>
         <p class="hero-description">Любимые сюжеты на футболках.<br>Ваши идеи в печати и вышивке.<br>Одежда, в которой есть что-то личное.</p>
         <a class="button button-dark hero-cta" href="#catalog">Выбрать футболку <span aria-hidden="true">↗</span></a>
       </div>
@@ -88,7 +88,7 @@
                 <path d="M44 37L94 15L99 25L49 47Z" fill="#3c4038"/><path d="M50 47L100 25L102 30L52 52Z" fill="#f1d2ae"/>
                 <path class="method-arrow" d="M147 60H174M166 53L174 60L166 67"/>
                 <path d="M194 31H286L293 39L286 45L293 51L286 57L293 63L286 69L293 75L286 81L293 87H194Z" fill="#f7f0e5" stroke="#bfa88f"/>
-                <path d="M221 63C221 41 242 39 243 59C257 46 268 64 251 72C238 78 229 72 221 63Z" fill="#b95137"/>
+                <path id="screen-print-motif" d="M221 63C221 41 242 39 243 59C257 46 268 64 251 72C238 78 229 72 221 63Z" fill="#b95137"/>
               </svg>
               <figcaption><span>Сетка с трафаретом</span><span aria-hidden="true">→</span><span>Краска на ткани</span></figcaption>
             </figure>
@@ -235,7 +235,14 @@
     </section>
 
     <section class="about-section shell section-space" id="about" aria-labelledby="about-title">
-      <div class="about-copy"><p class="eyebrow">04 / ОБО МНЕ</p><h2 id="about-title">Привет,<br>я <span class="serif-word">Игорь.</span></h2><p class="about-lead">Я занимаюсь печатью и вышивкой на одежде. Люблю, когда обычная вещь становится особенной благодаря идее, рисунку или маленькой детали.</p><p>Здесь собраны мои футболки. А ещё это место для ваших идей. Можно прийти с готовым дизайном или просто с мыслью «хочу что-то такое». Обсудим и найдём, как это реализовать.</p><a class="text-link" href="https://t.me/ig_alferov" target="_blank" rel="noopener noreferrer">Всегда на связи в Telegram <span>@ig_alferov ↗</span></a></div>
+      <div class="about-copy">
+        <p class="eyebrow">04 / ОБО МНЕ</p>
+        <h2 id="about-title">Привет,<br>я <span class="serif-word">Игорь.</span></h2>
+        <p class="about-lead">Я занимаюсь печатью и вышивкой на одежде. Люблю, когда обычная вещь становится особенной благодаря идее, рисунку или маленькой детали.</p>
+        <p>Здесь собраны мои футболки. А ещё это место для ваших идей. Можно прийти с готовым дизайном или просто с мыслью «хочу что-то такое». Обсудим и найдём, как это реализовать.</p>
+        <p>Открыт к совместному творчеству с художниками и другими авторами. Если хотите превратить свою работу в принт или вышивку, напишите мне.</p>
+        <a class="text-link" href="https://t.me/ig_alferov" target="_blank" rel="noopener noreferrer">Всегда на связи в Telegram <span>@ig_alferov ↗</span></a>
+      </div>
       <div class="portrait-wrap"><img src="assets/igor.webp" alt="Игорь, основатель ALFEROV ART STUDIO" width="640" height="640" loading="lazy"><div class="portrait-label"><span class="portrait-caption">Человек за этим проектом ↗</span></div></div>
     </section>
 
@@ -251,7 +258,11 @@
       <p class="project-intro">Ответьте на несколько вопросов. Соберём сообщение для Игоря в Telegram.</p>
       <div id="project-print-summary" class="project-print-summary" hidden></div>
       <form id="project-form" novalidate>
-        <div class="project-field"><label for="project-idea">Что хотите сделать?</label><textarea id="project-idea" rows="3" maxlength="700" placeholder="Например, футболки с рисунком для команды. Расскажите о дизайне, цветах и пожеланиях." required aria-describedby="project-error"></textarea></div>
+        <div class="project-field">
+          <label for="project-idea">Что хотите сделать?</label>
+          <textarea id="project-idea" rows="3" maxlength="700" placeholder="Например, футболки с рисунком для команды. Расскажите о дизайне, цветах и пожеланиях." required aria-describedby="project-idea-hint project-error"></textarea>
+          <p class="project-field-hint" id="project-idea-hint">После отправки заявки вы сможете прикрепить свои изображения для принтов в чате с менеджером в Telegram и указать, в каких зонах их разместить.</p>
+        </div>
         <div class="project-field-row">
           <div class="project-field"><label for="project-garment">На какой одежде? <span class="optional">необязательно</span></label><input id="project-garment" type="text" maxlength="80" placeholder="Футболки, худи или другое изделие"></div>
           <div class="project-field"><label for="project-quantity">Количество вещей</label><input id="project-quantity" type="number" min="1" step="1" value="1" inputmode="numeric" required aria-describedby="project-error"></div>
@@ -278,9 +289,18 @@
         <img id="project-sheet-image" alt="Схема всех принтов на груди и на спине">
         <figcaption>Схема для заявки</figcaption>
         <div class="project-sheet-actions">
-          <button class="copy-button" id="project-share-sheet" type="button" hidden>Поделиться схемой</button>
-          <a class="copy-button" id="project-download-sheet" download="alferov-print-layout.png" hidden>Скачать схему</a>
-          <button class="copy-button" id="project-copy-sheet" type="button" hidden>Скопировать картинку</button>
+          <button class="copy-button" id="project-share-sheet" type="button" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m-4 4 4-4 4 4M5 12v8h14v-8"/></svg>
+            <span>Поделиться схемой</span>
+          </button>
+          <a class="copy-button" id="project-download-sheet" download="alferov-print-layout.png" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg>
+            <span>Скачать схему</span>
+          </a>
+          <button class="copy-button" id="project-copy-sheet" type="button" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+            <span>Скопировать картинку</span>
+          </button>
         </div>
         <p class="copy-status" id="project-sheet-status" role="status"></p>
       </figure>

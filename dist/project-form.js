@@ -14,6 +14,7 @@ export function initProjectForm({ getPrintSelection } = {}) {
   const sheetShare = $('#project-share-sheet');
   const sheetCopy = $('#project-copy-sheet');
   const sheetStatus = $('#project-sheet-status');
+  const sheetActions = [sheetShare, sheetDownload, sheetCopy];
   const chatUrl = `https://t.me/${studio.telegram}`;
   const regularIntro = $('#project-ready-intro').textContent;
   let selection = null;
@@ -36,6 +37,11 @@ export function initProjectForm({ getPrintSelection } = {}) {
     dialog.setAttribute('aria-labelledby', ready ? 'project-ready-title' : 'project-title');
     dialog.scrollTop = 0;
   }
+  function showSheetFeedback(message, action, state) {
+    for (const button of sheetActions) delete button.dataset.feedback;
+    if (action) action.dataset.feedback = state;
+    sheetStatus.textContent = message;
+  }
   function clearSheet() {
     if (sheet?.downloadUrl) URL.revokeObjectURL(sheet.downloadUrl);
     sheet = null;
@@ -45,7 +51,8 @@ export function initProjectForm({ getPrintSelection } = {}) {
     sheetDownload.hidden = true;
     sheetCopy.hidden = true;
     sheetShare.hidden = true;
-    sheetStatus.textContent = '';
+    for (const action of sheetActions) action.removeAttribute('aria-busy');
+    showSheetFeedback('');
   }
   async function prepareSheet(areas) {
     const source = printSheetSource(createPrintSheetSvg(areas));
@@ -146,26 +153,42 @@ export function initProjectForm({ getPrintSelection } = {}) {
     showReady(false);
     fields.idea.focus({ preventScroll: true });
   });
-  sheetShare.addEventListener('click', async () => {
+  async function runSheetAction(action, { pending, success }, operation) {
     const current = sheet;
-    if (!current?.file) return;
+    if (!current?.file || action.hasAttribute('aria-busy')) return;
+    action.setAttribute('aria-busy', 'true');
+    showSheetFeedback(pending, action, 'pending');
     try {
-      await navigator.share({ files: [current.file], text: $('#project-message').value });
-    } catch (error) {
-      if (sheet === current && error.name !== 'AbortError') {
-        sheetStatus.textContent = 'Скачайте схему, чтобы прикрепить её в чате.';
+      await operation(current.file);
+      if (sheet === current && action.dataset.feedback === 'pending') {
+        showSheetFeedback(success, action, 'success');
       }
+    } catch (error) {
+      if (sheet === current && action.dataset.feedback === 'pending') {
+        if (error.name === 'AbortError') {
+          showSheetFeedback('Действие отменено. Схему можно скачать.');
+        } else {
+          showSheetFeedback('Действие недоступно. Скачайте схему и прикрепите её в чате.', action, 'error');
+        }
+      }
+    } finally {
+      if (sheet === current) action.removeAttribute('aria-busy');
     }
+  }
+  sheetShare.addEventListener('click', () => {
+    void runSheetAction(sheetShare, {
+      pending: 'Открываем меню «Поделиться»…',
+      success: 'Схема передана в выбранное приложение.',
+    }, file => navigator.share({ files: [file], text: $('#project-message').value }));
   });
-  sheetCopy.addEventListener('click', async () => {
-    const current = sheet;
-    if (!current?.file) return;
-    try {
-      await navigator.clipboard.write([new ClipboardItem({ 'image/png': current.file })]);
-      if (sheet === current) sheetStatus.textContent = 'Схема скопирована. Вставьте её в чате Telegram.';
-    } catch {
-      if (sheet === current) sheetStatus.textContent = 'Скачайте схему, чтобы прикрепить её в чате.';
-    }
+  sheetDownload.addEventListener('click', () => {
+    showSheetFeedback('Скачивание схемы началось. Прикрепите файл в чате Telegram.', sheetDownload, 'success');
+  });
+  sheetCopy.addEventListener('click', () => {
+    void runSheetAction(sheetCopy, {
+      pending: 'Копируем картинку…',
+      success: 'Картинка скопирована. Вставьте её в чате Telegram.',
+    }, file => navigator.clipboard.write([new ClipboardItem({ 'image/png': file })]));
   });
   $('#project-copy').addEventListener('click', async () => {
     try {
