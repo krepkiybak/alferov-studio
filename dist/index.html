@@ -16,7 +16,7 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preload" as="font" href="assets/golos-cyrillic.woff2" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="assets/milk-express.webp">
-  <link rel="stylesheet" href="styles.css?v=20261106-feedback1">
+  <link rel="stylesheet" href="styles.css?v=20261107-footer1">
   <script type="module" src="app.js?v=20261106-feedback1"></script>
 </head>
 <body>
@@ -248,7 +248,30 @@
 
   </main>
 
-  <footer class="site-footer shell"><a class="footer-brand" href="#" aria-label="ALFEROV ART STUDIO, на главную">ALFEROV<span class="brand-studio"> ART STUDIO</span></a><span>© <span id="year">2026</span> · Печать и вышивка на одежде</span><a href="#" class="back-top">Наверх ↑</a></footer>
+  <footer class="site-footer shell" id="contacts">
+    <div class="footer-main">
+      <div class="footer-intro">
+        <a class="footer-brand" href="#" aria-label="ALFEROV ART STUDIO, на главную">ALFEROV<span class="brand-studio"> ART STUDIO</span></a>
+        <p>Прямой контакт для ваших вопросов, корпоративных и оптовых заказов.</p>
+      </div>
+      <div class="footer-contact-column">
+        <p class="footer-column-label">Связаться напрямую</p>
+        <address class="footer-contacts">
+          <a href="mailto:alferovartstudio@yandex.ru">alferovartstudio@yandex.ru</a>
+          <a href="tel:+79657841401">+7 965 784-14-01</a>
+        </address>
+      </div>
+      <nav class="footer-documents" aria-label="Документы мастерской">
+        <p class="footer-column-label">Документы</p>
+        <a href="documents/privacy-policy.pdf" target="_blank" rel="noopener noreferrer"><span>Политика обработки персональных данных</span><span class="footer-document-type" aria-hidden="true">PDF ↗</span></a>
+        <a href="documents/public-offer.pdf" target="_blank" rel="noopener noreferrer"><span>Публичная оферта</span><span class="footer-document-type" aria-hidden="true">PDF ↗</span></a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> · Печать и вышивка на одежде</span>
+      <a href="#" class="back-top">Наверх ↑</a>
+    </div>
+  </footer>
 
   <dialog id="project-dialog" class="project-dialog" aria-labelledby="project-title">
     <button class="dialog-close circle-button" type="button" data-project-close aria-label="Закрыть форму проекта">×</button>
@@ -276,7 +299,7 @@
           <div class="project-field"><label for="project-phone">Номер телефона</label><input id="project-phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" placeholder="+7 999 123 45 67" required aria-describedby="project-error"></div>
           <div class="project-field"><label for="project-telegram">Ник в Telegram</label><input id="project-telegram" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="50" placeholder="@your_username" required aria-describedby="project-error"></div>
         </div>
-        <p class="privacy-note">Ответы и контакты будут добавлены в сообщение для @ig_alferov. Сайт их не хранит.</p>
+        <p class="privacy-note">Ответы и контакты будут добавлены в сообщение для @ig_alferov. Сайт их не хранит. <a href="documents/privacy-policy.pdf" target="_blank" rel="noopener noreferrer">Политика обработки персональных данных</a>.</p>
         <p id="project-error" class="field-error" role="alert"></p>
         <button class="button button-dark" type="submit">Подготовить запрос <span aria-hidden="true">↗</span></button>
         <p class="manager-note">После отправки сообщения менеджер свяжется с вами в ближайшее время.</p>
@@ -329,7 +352,7 @@
           <button class="button button-dark order-button" id="start-order" type="button">Заказать футболку <span aria-hidden="true">↗</span></button>
           <div class="product-details"><span>Печать на одежде</span><span>Личное общение</span></div>
         </div>
-        <div id="order-step" hidden><button class="back-button" id="back-to-product" type="button">← К футболке</button><p class="eyebrow">ЕЩЁ ОДИН ШАГ</p><h2 class="order-title">Почти ваша.</h2><p class="order-intro">Оставьте контакты. Подготовим сообщение для Игоря в Telegram.</p><div class="order-summary" id="order-summary"></div><form id="order-form" novalidate><label for="phone">Номер телефона</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 999 123 45 67" maxlength="24" required aria-describedby="form-error"><label for="telegram">Ник в Telegram</label><input id="telegram" name="telegram" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@your_username" maxlength="50" required aria-describedby="form-error"><label for="comment">Комментарий <span class="optional">необязательно</span></label><textarea id="comment" name="comment" rows="2" maxlength="500" placeholder="Например, вопрос о размере или доставке"></textarea><p class="privacy-note">Контакты будут добавлены только в сообщение для @ig_alferov. Сайт их не хранит.</p><p id="form-error" class="field-error" role="alert"></p><button class="button button-dark" type="submit">Подготовить заявку <span aria-hidden="true">↗</span></button><p class="manager-note">После отправки сообщения с вами свяжется менеджер в ближайшее время.</p></form></div>
+        <div id="order-step" hidden><button class="back-button" id="back-to-product" type="button">← К футболке</button><p class="eyebrow">ЕЩЁ ОДИН ШАГ</p><h2 class="order-title">Почти ваша.</h2><p class="order-intro">Оставьте контакты. Подготовим сообщение для Игоря в Telegram.</p><div class="order-summary" id="order-summary"></div><form id="order-form" novalidate><label for="phone">Номер телефона</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 999 123 45 67" maxlength="24" required aria-describedby="form-error"><label for="telegram">Ник в Telegram</label><input id="telegram" name="telegram" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@your_username" maxlength="50" required aria-describedby="form-error"><label for="comment">Комментарий <span class="optional">необязательно</span></label><textarea id="comment" name="comment" rows="2" maxlength="500" placeholder="Например, вопрос о размере или доставке"></textarea><p class="privacy-note">Контакты будут добавлены только в сообщение для @ig_alferov. Сайт их не хранит. <a href="documents/privacy-policy.pdf" target="_blank" rel="noopener noreferrer">Политика обработки персональных данных</a>.</p><p id="form-error" class="field-error" role="alert"></p><button class="button button-dark" type="submit">Подготовить заявку <span aria-hidden="true">↗</span></button><p class="manager-note">После отправки сообщения с вами свяжется менеджер в ближайшее время.</p></form></div>
         <div id="ready-step" hidden><div class="ready-icon" aria-hidden="true">↗</div><p class="eyebrow">ЗАЯВКА ПОДГОТОВЛЕНА</p><h2>Отправим<br>Игорю?</h2><p>Откройте Telegram и нажмите «Отправить» в чате. После отправки менеджер свяжется с вами в ближайшее время.</p><a class="button button-dark" id="send-telegram" href="https://t.me/ig_alferov" target="_blank" rel="noopener noreferrer">Отправить в Telegram <span aria-hidden="true">↗</span></a><details class="message-fallback"><summary>Сообщение не подставилось?</summary><p>Скопируйте текст ниже и отправьте его в чат <a href="https://t.me/ig_alferov" target="_blank" rel="noopener noreferrer">@ig_alferov</a>.</p><textarea id="order-message" readonly rows="9" aria-label="Текст заявки"></textarea><button id="copy-order" class="copy-button" type="button">Скопировать заявку</button><p class="copy-status" id="copy-status" role="status"></p></details><button type="button" class="back-button" id="edit-order">← Изменить контакты</button></div>
       </div>
     </div>
