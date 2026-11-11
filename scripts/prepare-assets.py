@@ -9,6 +9,8 @@ source = Path(sys.argv[1])
 target = Path(__file__).resolve().parent.parent / 'dist' / 'assets'
 target.mkdir(parents=True, exist_ok=True)
 files = {
+    'Белая оверсайз-футболка с мини-принтом кота-волшебника.png': 'wizard-cat-shirt.webp',
+    'Чёрный кот-волшебник с надписью Хогвартс.png': 'wizard-cat-print.webp',
     'Молочная футболка с акварельным поездом.png': 'milk-express.webp',
     'Чёрная футболка с Хогвартс-экспрессом-1.png': 'black-express.webp',
     'Чёрная футболка с акварельным пером.png': 'leviosa.webp',

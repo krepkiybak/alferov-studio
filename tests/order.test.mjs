@@ -129,5 +129,6 @@ test('Orders include the selected quantity, unit price and correct total', () =>
 test('All local HTML assets and product photos exist', async () => {
   const html = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
   const references = [...html.matchAll(/(?:href|src)="([^"#:]+)"/g)].map((match) => match[1]);
-  await Promise.all([...references, ...products.map((p) => p.image)].map((relative) => access(new URL(`../dist/${relative}`, import.meta.url))));
+  const productImages = products.flatMap(product => [product.image, product.detailImage].filter(Boolean));
+  await Promise.all([...references, ...productImages].map((relative) => access(new URL(`../dist/${relative}`, import.meta.url))));
 });

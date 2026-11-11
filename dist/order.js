@@ -1,4 +1,4 @@
-import { products, studio, formatPrice } from './catalog.js';
+import { products, studio, formatPrice } from './catalog.js?v=20261111-cat1';
 
 export function formatPhone(raw) {
   const value = String(raw).trim();

@@ -1,5 +1,5 @@
-import { products, studio, formatPrice } from './catalog.js';
-import { prepareOrder, normalizePhone, normalizeTelegram } from './order.js';
+import { products, studio, formatPrice } from './catalog.js?v=20261111-cat1';
+import { prepareOrder, normalizePhone, normalizeTelegram } from './order.js?v=20261111-cat1';
 import { initPrintGuide } from './print-guide.js?v=20261105-layout1';
 import { startTypography } from './typography.js';
 import { bindPhoneInput } from './phone-input.js';
@@ -13,17 +13,19 @@ let selectedSize = '';
 let selectedQuantity = 1;
 let lastTrigger;
 
+const productCount = String(products.length).padStart(2, '0');
+$('#catalog-count').textContent = productCount;
 $('#product-grid').innerHTML = products.map((product, index) => `
   <article class="product-card">
     <button type="button" class="product-card-image" data-product="${product.id}" aria-label="Посмотреть ${product.name}, ${product.color.toLowerCase()} цвет">
-      <span class="product-number">0${index + 1} / 03</span>
-      <img src="${product.image}" alt="Футболка ${product.name}, ${product.color.toLowerCase()} цвет" width="${product.id === 'leviosa' ? 1199 : 1440}" height="${product.id === 'leviosa' ? 1312 : 960}" loading="lazy">
+      <span class="product-number">${String(index + 1).padStart(2, '0')} / ${productCount}</span>
+      <img src="${product.image}" alt="Футболка ${product.name}, ${product.color.toLowerCase()} цвет" width="${product.imageWidth}" height="${product.imageHeight}" loading="lazy">
       <span class="product-view-label">Рассмотреть поближе <span aria-hidden="true">↗</span></span>
     </button>
     <div class="product-card-text">
       <div class="product-title-row"><h3><button type="button" data-product="${product.id}">${product.name}</button></h3><span class="product-card-price">${formatPrice(product.price)}</span></div>
       <div class="color-row"><span class="color-dot" style="background:${product.colorHex}" aria-hidden="true"></span>${product.color}</div>
-      <div class="product-card-bottom"><span class="product-sizes">S · M · L · XL · XXL</span><button class="product-order-link" type="button" data-product="${product.id}">Выбрать <span aria-hidden="true">↗</span></button></div>
+      <div class="product-card-bottom"><span class="product-sizes">${studio.sizes.join(' · ')}</span><button class="product-order-link" type="button" data-product="${product.id}">Выбрать <span aria-hidden="true">↗</span></button></div>
     </div>
   </article>`).join('');
 
@@ -64,7 +66,11 @@ $('#ready-step h2').id = 'ready-heading';
 
 function setGallery(view) {
   const detail = view === 'detail';
-  $('#gallery-main').classList.toggle('detail', detail);
+  const separateImage = detail && selectedProduct.detailImage;
+  $('#gallery-main').classList.toggle('detail', detail && !separateImage);
+  $('#product-image').src = separateImage || selectedProduct.image;
+  $('#product-image').width = selectedProduct.imageWidth;
+  $('#product-image').height = selectedProduct.imageHeight;
   $('#gallery-label').textContent = detail ? 'ДЕТАЛЬ ПРИНТА' : 'ОБЩИЙ ВИД';
   $('#product-image').alt = detail ? `Принт крупно: ${selectedProduct.name}` : `Футболка ${selectedProduct.name}, ${selectedProduct.color.toLowerCase()} цвет`;
   document.querySelectorAll('[data-view]').forEach((button) => {
@@ -90,10 +96,11 @@ function openProduct(id, trigger) {
   $('#product-price').textContent = `${formatPrice(selectedProduct.price)} / шт.`;
   setQuantity(1);
   $('#product-description').textContent = selectedProduct.description;
-  $('#product-image').src = selectedProduct.image;
-  document.querySelectorAll('.gallery-thumb img').forEach((img) => { img.src = selectedProduct.image; });
-  $('.gallery-column').style.setProperty('--detail-position', selectedProduct.detailPosition);
-  $('.gallery-column').style.setProperty('--detail-scale', selectedProduct.detailScale);
+  $('[data-view="full"] img').src = selectedProduct.image;
+  $('[data-view="detail"] img').src = selectedProduct.detailImage || selectedProduct.image;
+  $('.gallery-column').classList.toggle('has-detail-image', Boolean(selectedProduct.detailImage));
+  $('.gallery-column').style.setProperty('--detail-position', selectedProduct.detailPosition || '50% 40%');
+  $('.gallery-column').style.setProperty('--detail-scale', selectedProduct.detailScale || 1);
   document.querySelectorAll('[data-size]').forEach((button) => button.setAttribute('aria-pressed', 'false'));
   $('#size-error').textContent = '';
   $('#size-help').hidden = true;
@@ -129,8 +136,11 @@ $('#size-help-toggle').addEventListener('click', () => {
   $('#size-help-toggle').setAttribute('aria-expanded', String(open));
 });
 $('#gallery-expand').addEventListener('click', () => {
-  $('#lightbox-image').src = selectedProduct.image;
-  $('#lightbox-image').alt = `${selectedProduct.name}, ${selectedProduct.color.toLowerCase()} цвет, полное фото`;
+  const currentPhoto = $('#product-image');
+  $('#lightbox-image').src = currentPhoto.src;
+  $('#lightbox-image').alt = currentPhoto.alt;
+  lightbox.setAttribute('aria-label', currentPhoto.alt);
+  lightbox.querySelector('p').textContent = currentPhoto.alt;
   lightbox.showModal();
 });
 
