@@ -11,13 +11,13 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:url" content="https://krepkiybak.github.io/alferov-studio/">
-  <meta property="og:image" content="https://krepkiybak.github.io/alferov-studio/assets/milk-express.webp">
+  <meta property="og:image" content="https://krepkiybak.github.io/alferov-studio/assets/wizard-cat-shirt.webp">
   <link rel="canonical" href="https://krepkiybak.github.io/alferov-studio/">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preload" as="font" href="assets/golos-cyrillic.woff2" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="assets/milk-express.webp">
-  <link rel="stylesheet" href="styles.css?v=20261107-footer1">
-  <script type="module" src="app.js?v=20261106-feedback1"></script>
+  <link rel="preload" as="image" href="assets/wizard-cat-shirt.webp">
+  <link rel="stylesheet" href="styles.css?v=20261111-cat1">
+  <script type="module" src="app.js?v=20261111-cat1"></script>
 </head>
 <body>
   <a class="skip-link" href="#catalog">Перейти к каталогу</a>
@@ -42,11 +42,11 @@
       <div class="hero-visual">
         <div class="hero-image-wrap">
           <span class="hero-image-note">КОЛЛЕКЦИЯ № 01 / МАЛЕНЬКОЕ ВОЛШЕБСТВО</span>
-          <button class="hero-product" type="button" data-product="milk-express" aria-label="Посмотреть футболку Хогвартс-экспресс">
-            <img src="assets/milk-express.webp" alt="Молочная футболка с акварельным Хогвартс-экспрессом" width="1440" height="960" fetchpriority="high">
+          <button class="hero-product" type="button" data-product="wizard-cat" aria-label="Посмотреть футболку Кот-волшебник">
+            <img src="assets/wizard-cat-shirt.webp" alt="Белая оверсайз-футболка с мини-принтом кота-волшебника" width="1122" height="1402" fetchpriority="high">
           </button>
           <span class="round-note" aria-hidden="true">немного<br><span>магии</span><br>на каждый день</span>
-          <div class="hero-product-caption"><div><span class="caption-label">В ЦЕНТРЕ ВНИМАНИЯ</span><span>Хогвартс-экспресс</span></div><button class="circle-button" type="button" data-product="milk-express" aria-label="Открыть Хогвартс-экспресс">↗</button></div>
+          <div class="hero-product-caption"><div><span class="caption-label">В ЦЕНТРЕ ВНИМАНИЯ</span><span>Кот-волшебник</span></div><button class="circle-button" type="button" data-product="wizard-cat" aria-label="Открыть Кот-волшебник">↗</button></div>
         </div>
       </div>
     </section>
@@ -57,7 +57,7 @@
 
     <section class="catalog-section shell section-space" id="catalog" aria-labelledby="catalog-title">
       <div class="section-top"><div><p class="eyebrow">01 / КАТАЛОГ</p><h2 id="catalog-title">Немного волшебства.<br>На каждый день.</h2></div></div>
-      <div class="catalog-toolbar"><span>Футболки <sup>03</sup></span><span>Выберите принт. Найдите свой размер.</span></div>
+      <div class="catalog-toolbar"><span>Футболки <sup id="catalog-count">04</sup></span><span>Выберите принт. Найдите свой размер.</span></div>
       <div class="product-grid" id="product-grid"></div>
       <noscript><p>Для выбора размера и оформления заявки включите JavaScript. Заказать также можно напрямую в <a href="https://t.me/ig_alferov">Telegram @ig_alferov</a>.</p></noscript>
       <div class="catalog-note"><span aria-hidden="true">↳</span><p>Не нашли свою историю? <a href="#studio">Давайте создадим её вместе.</a></p></div>
@@ -337,7 +337,7 @@
   <dialog id="product-dialog" class="product-dialog" aria-labelledby="product-title">
     <button class="dialog-close circle-button" type="button" data-close aria-label="Закрыть карточку товара">×</button>
     <div class="product-dialog-layout">
-      <div class="gallery-column"><div class="gallery-main" id="gallery-main"><img id="product-image" src="assets/milk-express.webp" alt="" width="1440" height="960"><button class="gallery-expand" id="gallery-expand" type="button" aria-label="Открыть фотографию крупно">⤢</button><span class="gallery-label" id="gallery-label">ОБЩИЙ ВИД</span></div><div class="gallery-thumbs" aria-label="Ракурс фотографии"><button type="button" class="gallery-thumb active" data-view="full" aria-pressed="true"><img src="assets/milk-express.webp" alt=""><span>Футболка</span></button><button type="button" class="gallery-thumb" data-view="detail" aria-pressed="false"><span class="detail-thumb-image"><img src="assets/milk-express.webp" alt=""></span><span>Принт крупно</span></button><span class="gallery-hint">Рассмотрите<br>каждую деталь.</span></div></div>
+      <div class="gallery-column"><div class="gallery-main" id="gallery-main"><img id="product-image" src="assets/wizard-cat-shirt.webp" alt="" width="1122" height="1402"><button class="gallery-expand" id="gallery-expand" type="button" aria-label="Открыть фотографию крупно">⤢</button><span class="gallery-label" id="gallery-label">ОБЩИЙ ВИД</span></div><div class="gallery-thumbs" aria-label="Ракурс фотографии"><button type="button" class="gallery-thumb active" data-view="full" aria-pressed="true"><img src="assets/wizard-cat-shirt.webp" alt=""><span>Футболка</span></button><button type="button" class="gallery-thumb" data-view="detail" aria-pressed="false"><span class="detail-thumb-image"><img src="assets/wizard-cat-print.webp" alt=""></span><span>Принт крупно</span></button><span class="gallery-hint">Рассмотрите<br>каждую деталь.</span></div></div>
       <div class="product-info">
         <div id="product-choice">
           <p class="eyebrow" id="product-tag"></p><h2 id="product-title"></h2><p class="product-color" id="product-color"></p><p class="modal-price" id="product-price"></p><p class="product-description" id="product-description"></p>
@@ -358,6 +358,6 @@
     </div>
   </dialog>
 
-  <dialog id="image-dialog" class="image-dialog" aria-label="Фотография футболки крупно"><button class="dialog-close circle-button" type="button" data-close aria-label="Закрыть фотографию">×</button><img id="lightbox-image" src="assets/milk-express.webp" alt="Фотография футболки крупно"><p>Детали принта можно рассмотреть в карточке товара</p></dialog>
+  <dialog id="image-dialog" class="image-dialog" aria-label="Фотография футболки крупно"><button class="dialog-close circle-button" type="button" data-close aria-label="Закрыть фотографию">×</button><img id="lightbox-image" src="assets/wizard-cat-shirt.webp" alt="Фотография футболки крупно"><p>Детали принта можно рассмотреть в карточке товара</p></dialog>
 </body>
 </html>
